@@ -21,7 +21,7 @@ const Navbar = () => {
             width={115}
             height={18}
             className="object-contain"
-          />
+          />  
         </Link>
 
         <div className="flex justify-end items-center">
