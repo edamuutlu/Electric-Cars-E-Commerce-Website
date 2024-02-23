@@ -47,7 +47,7 @@ const CartSidebar = () => {
           <div>
             <div className="flex justify-between font-semibold">
               <div className="uppercase mb-5">Total</div>
-              <div>{totalPrice.toFixed(2)} TL</div>
+              <div>{totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}  TL</div>
             </div>
             <CheckoutBtn />
           </div>

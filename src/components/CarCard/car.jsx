@@ -42,7 +42,7 @@ const Car = ({ car }) => {
 
       <p className="flex mt-6 text-[32px] font-extrabold">
         <span className="self-start text-[14px] font-semibold">TL</span>
-        {car.price}
+        {(car.price).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
         <span className="self-end text-[14px] font-medium">/Cash</span>
       </p>
 

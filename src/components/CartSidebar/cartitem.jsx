@@ -45,7 +45,7 @@ const CartItem = ({ item, open }) => {
             </button>
           </div>
           <div className="font-semibold">
-            TL {(item.price * item.quantity).toFixed(2)}
+          {(item.price * item.quantity).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} TL
           </div>
         </div>
       </div>
