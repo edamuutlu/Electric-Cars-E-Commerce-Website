@@ -1,0 +1,43 @@
+.auth_container{
+    @apply bg-black h-full w-full bg-opacity-45 pt-36 px-3;
+}
+
+.auth_formDiv{
+    @apply bg-black bg-opacity-85 px-20 py-20 self-center mt-2 xl:w-[650px] lg:w-2/5 md:w-[450px] sm:w-[350px] rounded-xl
+}
+
+.auth_input {
+    @apply block rounded-xl px-6 pt-3 pb-2 mb-5 w-full text-base text-white bg-neutral-600;
+  }
+
+.auth_submit{
+    @apply bg-red-700 py-3 text-white hover:bg-red-800 transition rounded-md w-full mt-5
+}
+
+.auth_login{
+    @apply text-white ml-2 cursor-pointer hover:underline transition
+}
+
+
+.nav-button .btn{
+    width: 130px;
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+.btn:hover{
+    background: rgba(255, 255, 255, 0.3);
+}
+#registerBtn{
+    margin-left: 15px;
+}
+.btn.white-btn{
+    background: rgba(255, 255, 255, 0.7);
+}
+.btn.btn.white-btn:hover{
+    background: rgba(255, 255, 255, 0.5);
+}
