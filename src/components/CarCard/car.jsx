@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddToCart from "../addToCart/addToCart";
 
 const Car = ({ car }) => {
   const { addItem } = useShoppingCart();
@@ -42,7 +43,7 @@ const Car = ({ car }) => {
 
       <p className="flex mt-6 text-[32px] font-extrabold">
         <span className="self-start text-[14px] font-semibold">TL</span>
-        {(car.price).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+        {car.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         <span className="self-end text-[14px] font-medium">/Cash</span>
       </p>
 
@@ -94,15 +95,19 @@ const Car = ({ car }) => {
             />
           </Link>
 
-          <CustomButtom
+          <AddToCart
+            /* id={car._id} */
+            price_id={car.price_id}
+            name={car.name}
+            currency="TL"
+            description={car.description}
+            images={car.images}
+            price={car.price}
+            slug={car.slug}
             title="Add to Card"
-            containerStyles="w-50 py-[16px] rounded-full bg-red-500"
+            containerStyles="w-50 py-[16px rounded-full bg-red-500"
             textStyles="text-white text-[14px] leading-[17px] font-bold mr-3"
             rightIcon="/add-to-basket.png"
-            handleClick={() => {
-              addItem(carObject);
-              notify();
-            }}
           />
         </div>
       </div>

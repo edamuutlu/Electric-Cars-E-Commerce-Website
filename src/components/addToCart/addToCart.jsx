@@ -1,6 +1,8 @@
 "use client";
 import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddToCart = ({
   title,
@@ -31,7 +33,7 @@ const AddToCart = ({
 
   const notify = () =>
     toast.success(`${carObject.name} has been added to the cart`, {
-      position: "top-right",
+      position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -45,7 +47,11 @@ const AddToCart = ({
       <button
         disabled={false}
         className={`custom-btn ${containerStyles}`}
-        onClick={() => addItem(carObject)}
+        onClick={() => {
+          addItem(carObject);
+          notify();
+          console.log(carObject);
+        }}
       >
         <span className={`flex-1 ${textStyles}`}>{title}</span>
         {rightIcon && (

@@ -18,18 +18,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
+
   return (
     <html lang="en">
-      <body >
+      <body>
         <SessionProvider session={session}>
-
-        <CartProvider>
-          <Navbar />
-          {children}
-          <ToastContainer stacked />
-          <Footer />
-        </CartProvider>
-        
+          <CartProvider>
+            <Navbar />
+            {children}
+            <ToastContainer stacked />
+            <Footer />
+          </CartProvider>
         </SessionProvider>
       </body>
     </html>

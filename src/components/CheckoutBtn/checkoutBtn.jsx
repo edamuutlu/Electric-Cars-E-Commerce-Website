@@ -15,7 +15,8 @@ const CheckoutBtn = () => {
   return (
     <button
       onClick={handleCheckout}
-      className="py-4 text-white uppercase bg-black hover:bg-black-100 w-full shadow-lg rounded-md"
+      className="py-4 text-white uppercase bg-black hover:bg-black-100 
+      w-full shadow-lg rounded-md"
     >
       Proceed To Checkout
     </button>

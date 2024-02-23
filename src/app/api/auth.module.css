@@ -1,5 +1,5 @@
 .auth_container{
-    @apply bg-black h-full w-full bg-opacity-45 pt-36 px-3;
+    @apply h-full w-full bg-opacity-45 pt-36 px-3;
 }
 
 .auth_formDiv{
@@ -16,28 +16,4 @@
 
 .auth_login{
     @apply text-white ml-2 cursor-pointer hover:underline transition
-}
-
-
-.nav-button .btn{
-    width: 130px;
-    height: 40px;
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.4);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: .3s ease;
-}
-.btn:hover{
-    background: rgba(255, 255, 255, 0.3);
-}
-#registerBtn{
-    margin-left: 15px;
-}
-.btn.white-btn{
-    background: rgba(255, 255, 255, 0.7);
-}
-.btn.btn.white-btn:hover{
-    background: rgba(255, 255, 255, 0.5);
 }

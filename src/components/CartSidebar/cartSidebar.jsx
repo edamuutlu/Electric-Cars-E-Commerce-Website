@@ -10,6 +10,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useShoppingCart } from "use-shopping-cart";
 import CheckoutBtn from "../CheckoutBtn/checkoutBtn";
+import CustomButtom from "./../custombuttom/custombuttom";
 
 const CartSidebar = () => {
   const {
@@ -18,6 +19,7 @@ const CartSidebar = () => {
     shouldDisplayCart,
     handleCartClick,
     totalPrice,
+    clearCart,
   } = useShoppingCart();
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
@@ -47,9 +49,17 @@ const CartSidebar = () => {
           <div>
             <div className="flex justify-between font-semibold">
               <div className="uppercase mb-5">Total</div>
-              <div>{totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}  TL</div>
+              <div>
+                {totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} TL
+              </div>
             </div>
             <CheckoutBtn />
+            <CustomButtom
+              title="Clear to Cart"
+              containerStyles="py-4 mt-3 text-white uppercase bg-black hover:bg-black-100 
+              w-full shadow-lg rounded-md"
+              handleClick={() => clearCart()}
+            />
           </div>
         )}
       </SheetContent>

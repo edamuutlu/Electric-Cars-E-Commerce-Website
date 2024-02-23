@@ -63,7 +63,7 @@ const ProductDetails = async ({ params }) => {
               </p>
               {/* botton */}
               <AddToCart
-                id={car._id}
+                /* id={car._id} */
                 price_id={car.price_id}
                 name={car.name}
                 currency="TL"
