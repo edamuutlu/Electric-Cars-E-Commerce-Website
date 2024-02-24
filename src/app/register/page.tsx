@@ -60,7 +60,19 @@ const Register = () => {
   };
 
   if (sessionStatus === "loading") {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="loader">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+          <img
+            src="ecar_logo.png"
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+            }}
+          />
+        </div>
+      </div>
+    );
   }
 
   return (
