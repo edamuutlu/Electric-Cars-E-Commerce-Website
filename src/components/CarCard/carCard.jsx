@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import styles from "./carcard.module.css";
 import Car from "./car";
 

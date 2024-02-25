@@ -5,14 +5,9 @@ import Link from "next/link";
 import styles from "./carcard.module.css";
 import { urlFor } from "@/app/lib/sanity";
 import CustomButtom from "../custombuttom/custombuttom";
-import { useState } from "react";
-import { useShoppingCart } from "use-shopping-cart";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import AddToCart from "../addToCart/addToCart";
 
 const Car = ({ car }) => {
-  const { addItem } = useShoppingCart();
   const carObject = {
     id: car._id,
     name: car.name,
@@ -23,17 +18,6 @@ const Car = ({ car }) => {
     price_id: car.price_id,
     slug: car.slug,
   };
-  const notify = () =>
-    toast.success(`${carObject.name} has been added to the cart`, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
 
   return (
     <div key={car._id} className={`${styles.car_card} group`}>

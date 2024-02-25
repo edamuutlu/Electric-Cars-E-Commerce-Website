@@ -7,17 +7,30 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { allData, getById } from "@/constans";
+import { useEffect } from "react";
 
 const Navbar = () => {
-  const { data: session }: any = useSession();
+  const { data: session, status: sessionStatus }: any = useSession();
   const { cartCount, handleCartClick } = useShoppingCart();
 
   const pathname = usePathname();
-  console.log(pathname);
+
+  useEffect(() => {
+    if (sessionStatus === "authenticated") {
+      getById(session.user.email)
+        .then((id) => {
+          console.log(id);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [sessionStatus]);
 
   return (
     <header className="w-full fixed z-10">
-      <nav className="max-w-full shadow-lg sticky mx-auto flex justify-between items-center sm:px-16 px-4">
+      <nav className="max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
         <Link href={"/"} className="flex justify-center items-center">
           <Image
             src={"/ecar_logo.png"}

@@ -1,46 +1,73 @@
-export const manufacturers = [
-  "Acura",
-  "Alfa Romeo",
-  "Aston Martin",
-  "Audi",
-  "Bentley",
-  "BMW",
-  "Buick",
-  "Cadillac",
-  "Chevrolet",
-  "Chrysler",
-  "Citroen",
-  "Dodge",
-  "Ferrari",
-  "Fiat",
-  "Ford",
-  "GMC",
-  "Honda",
-  "Hyundai",
-  "Infiniti",
-  "Jaguar",
-  "Jeep",
-  "Kia",
-  "Lamborghini",
-  "Land Rover",
-  "Lexus",
-  "Lincoln",
-  "Maserati",
-  "Mazda",
-  "McLaren",
-  "Mercedes-Benz",
-  "MINI",
-  "Mitsubishi",
-  "Nissan",
-  "Porsche",
-  "Ram",
-  "Rolls-Royce",
-  "Subaru",
-  "Tesla",
-  "Toyota",
-  "Volkswagen",
-  "Volvo",
-];
+import { client } from "@/app/lib/sanity";
+import { GET } from "@/app/api/get/route";
+
+export const allData = async () => {
+  const query = `*[_type == 'product']{
+    _id,
+    name,
+    description,
+    car_type,
+    tire,
+    range,
+    images,
+    price,
+    price_id,
+    "slug": slug.current,
+    "categories": categories[]->{
+      name
+    }
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
+
+export const allCategory = async () => {
+  const query = `*[_type == 'category']{
+    name
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
+
+// ALL Category
+let manufacturers: string[] = []; // Boş bir dizi oluştur
+const fetchData = async () => {
+  try {
+    const data = await allCategory();
+    const names = data.map((item) => item.name);
+    manufacturers = names;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+fetchData();
+export { manufacturers };
+
+// ALL cars
+/* let manufacturers: string[] = []; // Boş bir dizi oluştur
+const fetchData = async () => {
+  try {
+    const data = await allData();
+    const names = data.map((item) => item.categories[0].name);
+    manufacturers = names;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+fetchData();
+export { manufacturers }; */
+
+// Get By User Id
+export const getById = async (emailBy: string) => {
+  try {
+    const email = emailBy;
+    const response = await GET(email);
+    const byId = response._id.toString();
+    return byId;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const yearsOfProduction = [
   { title: "Year", value: "" },

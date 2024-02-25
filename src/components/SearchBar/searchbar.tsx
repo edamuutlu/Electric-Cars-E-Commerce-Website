@@ -2,20 +2,21 @@
 import { useState } from "react";
 import styles from "./searchbar.module.css";
 import SearchManufacturer from "./searchmanufacturer";
+import { SearchManufacturerProps } from "@/types";
 
-const SearchBar = () => {
-  const [manufacturer, setManufacturer] = useState("");
-
-  const handleSearch = () => {};
+const SearchBar = ({
+  manufacturer,
+  setManufacturer,
+}: SearchManufacturerProps) => {
   return (
-    <form className={styles.searchbar} onSubmit={handleSearch}>
+    <aside className={styles.searchbar}>
       <div className={styles.searchbar__item}>
         <SearchManufacturer
           manufacturer={manufacturer}
           setManufacturer={setManufacturer}
         />
       </div>
-    </form>
+    </aside>
   );
 };
 
