@@ -2,33 +2,54 @@
 import { Combobox, Transition } from "@headlessui/react";
 import styles from "./searchbar.module.css";
 import { SearchManufacturerProps } from "@/types";
-import { manufacturers } from "@/constans";
+import { manufacturers, carModels } from "@/constans";
 import Image from "next/image";
 import { useState, Fragment } from "react";
 
 const SearchManufacturer = ({
   manufacturer,
   setManufacturer,
+  carModel,
+  setCarModel,
+  icon,
+  inputDisplay,
 }: SearchManufacturerProps) => {
   const [query, setQuery] = useState("");
 
-  const filteredManufacturers =
-    query === ""
-      ? manufacturers
-      : manufacturers.filter((item) =>
-          item
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+  let filteredOptions = [];
+
+  if (manufacturer) {
+    filteredOptions =
+      query === ""
+        ? manufacturers
+        : manufacturers.filter((item) =>
+            item
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          );
+  } else {
+    filteredOptions =
+      query === ""
+        ? carModels
+        : carModels.filter((item) =>
+            item
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          );
+  }
 
   return (
     <div className={styles.search_manufacturer}>
-      <Combobox value={manufacturer} onChange={setManufacturer}>
+      <Combobox
+        value={manufacturer || carModel}
+        onChange={manufacturer ? setManufacturer : setCarModel}
+      >
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
-              src={"/tesla-logo.png"}
+              src={`/${icon}`}
               alt="Car Logo"
               width={20}
               height={20}
@@ -37,9 +58,8 @@ const SearchManufacturer = ({
           </Combobox.Button>
 
           <Combobox.Input
-            className={styles.search_manufacturer__input}
-            placeholder="Tesla"
-            displayValue={(manufacturer: string) => manufacturer}
+            className={inputDisplay}
+            placeholder={manufacturer || carModel || "Search..."}
             onChange={(e) => setQuery(e.target.value)}
           />
 
@@ -51,7 +71,7 @@ const SearchManufacturer = ({
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options>
-              {filteredManufacturers.length === 0 && query !== "" ? (
+              {filteredOptions.length === 0 && query !== "" ? (
                 <Combobox.Option
                   value={query}
                   className={styles.search_manufacturer__option}
@@ -59,14 +79,14 @@ const SearchManufacturer = ({
                   Create "{query}"
                 </Combobox.Option>
               ) : (
-                filteredManufacturers.map((item) => (
+                filteredOptions.map((option) => (
                   <Combobox.Option
-                    key={item}
+                    key={option}
                     className={({ active }) => `
                         relative ${styles.search_manufacturer__option} ${
                       active ? "bg-primary-blue text-white" : "text-gray-900"
                     }`}
-                    value={item}
+                    value={option}
                   >
                     {({ selected, active }) => (
                       <>
@@ -75,7 +95,7 @@ const SearchManufacturer = ({
                             selected ? "font-medium" : "font-normal"
                           }`}
                         >
-                          {item}
+                          {option}
                         </span>
 
                         {/* Show an active blue background color if the option is selected */}

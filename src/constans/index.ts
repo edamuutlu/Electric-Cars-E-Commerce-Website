@@ -43,6 +43,20 @@ const fetchData = async () => {
 fetchData();
 export { manufacturers };
 
+// ALL Model
+let carModels: string[] = []; // Boş bir dizi oluştur
+const fetchModels = async () => {
+  try {
+    const data = await allCategory();
+    const names = data.map((item) => item.name);
+    carModels = names;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+fetchModels();
+export { carModels };
+
 // ALL cars
 /* let manufacturers: string[] = []; // Boş bir dizi oluştur
 const fetchData = async () => {
@@ -58,7 +72,7 @@ fetchData();
 export { manufacturers }; */
 
 // Get By User Id
-export const getById = async (emailBy: string) => {
+/* export const getById = async (emailBy: string) => {
   try {
     const email = emailBy;
     const response = await GET(email);
@@ -67,10 +81,9 @@ export const getById = async (emailBy: string) => {
   } catch (error) {
     console.error(error);
   }
-};
+}; */
 
 export const yearsOfProduction = [
-  { title: "Year", value: "" },
   { title: "2015", value: "2015" },
   { title: "2016", value: "2016" },
   { title: "2017", value: "2017" },
@@ -83,10 +96,6 @@ export const yearsOfProduction = [
 ];
 
 export const fuels = [
-  {
-    title: "Fuel",
-    value: "",
-  },
   {
     title: "Gas",
     value: "Gas",

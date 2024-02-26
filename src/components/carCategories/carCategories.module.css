@@ -3,11 +3,11 @@
 }
 
 .home__filters {
-  @apply mt-12 w-full flex items-center flex-wrap justify-between gap-5;
+  @apply mt-12 w-full flex items-center flex-wrap gap-5;
 }
 
 .home__filter_container {
-  @apply flex justify-start flex-wrap items-center gap-2;
+  @apply flex justify-start max-w-2xl flex-wrap items-center gap-2;
 }
 
 .home__cars_wrapper {

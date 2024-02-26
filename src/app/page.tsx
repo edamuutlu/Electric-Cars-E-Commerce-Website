@@ -3,7 +3,7 @@ import Hero from "@/components/Hero/hero";
 
 //get data
 import CarCategories from "@/components/carCategories/carCategories";
-import { allData, getById } from "@/constans";
+import { allData } from "@/constans";
 
 export default async function Home() {
   const cars = await allData();

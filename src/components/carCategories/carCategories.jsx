@@ -6,12 +6,20 @@ import CarCard from "@/components/CarCard/carCard";
 import styles from "./carCategories.module.css";
 import { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
+import { yearsOfProduction, fuels } from "@/constans";
+import { FaLiraSign } from "react-icons/fa";
+import PriceBox from "../PriceBox/priceBox";
 
 const CarCategories = ({ cars }) => {
+  const yearList = yearsOfProduction.map((item) => item.value);
+  const fuelList = fuels.map((item) => item.value);
   const [manufacturer, setManufacturer] = useState("all");
-  const [category, setCategory] = useState("all");
+  const [carModel, setCarModel] = useState("model-y3");
   const [filterCar, setFilterCars] = useState([]);
-  const [price, setPrice] = useState(10000000);
+  const [price, setPrice] = useState("0");
+  const [maxPrice, setMaxPrice] = useState(5000000);
+  const [year, setYear] = useState("");
 
   useEffect(() => {
     const filtered = cars.filter((car) => {
@@ -19,7 +27,8 @@ const CarCategories = ({ cars }) => {
         manufacturer === "all"
           ? cars
           : car.categories.some((categ) => categ.name === manufacturer);
-      const priceMatch = car.price <= price;
+      const priceMatch = car.price >= price && car.price <= maxPrice;
+      console.log(priceMatch);
       return categoryMatch && priceMatch;
     });
     setFilterCars(filtered);
@@ -33,35 +42,35 @@ const CarCategories = ({ cars }) => {
           cars={cars}
           manufacturer={manufacturer}
           setManufacturer={setManufacturer}
+          carModel={carModel}
+          setCarModel={setCarModel}
+          className="w-full"
         />
         <div className={styles.home__filter_container}>
-          <div className="mr-2">
-            <div className="text-lg mb-2 font-medium">
-              Max Price:{" "}
-              <span className="text-blue-600">
-                {price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}TL
-              </span>
-              <span className="ml-2">
-                {filterCar.length > 1
-                  ? `${filterCar.length} items`
-                  : filterCar === 0
-                  ? `${filterCar.length} items`
-                  : `${filterCar.length} item`}
-              </span>
+          <div className="mr-2 max-w-[220px]">
+            <div className="text-[16px] mb-2 font-medium flex">
+              <PriceBox title="Min Price:" price={price} setPrice={setPrice} />
+              <PriceBox
+                title="Max Price:"
+                price={maxPrice}
+                setPrice={setMaxPrice}
+              />
             </div>
             <Slider
-              defaultValue={[10000000]}
-              max={10000000}
+              defaultValue={[price]}
+              value={[price]}
+              max={[maxPrice]}
+              min={0}
               step={1}
               onValueChange={(val) => setPrice(val[0])}
             />
           </div>
-          <CustomFilter /* title="fuel" */ />
-          <CustomFilter /* title="year" */ />
+          <CustomFilter title="Year" yearList={yearList} />
+          <CustomFilter title="Fuel" fuelList={fuelList} />
         </div>
       </div>
 
-      <CarCard cars={filterCar} />
+      <CarCard cars={filterCar} filterCarLenght={filterCar.length} />
     </>
   );
 };

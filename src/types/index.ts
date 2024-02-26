@@ -11,8 +11,24 @@ export interface CustomButtomProps {
 }
 
 export interface SearchManufacturerProps {
-  manufacturer: string;
-  setManufacturer: (manufacturer: string) => void;
+  manufacturer?: string;
+  setManufacturer?: (manufacturer: string) => void;
+  carModel?: string;
+  setCarModel?: (carModel: string) => void;
+  icon?: string;
+  inputDisplay?: string;
+}
+
+export interface CustomFilterProps {
+  yearList?: string[];
+  fuelList?: string[];
+  title?: string;
+  /* manufacturer?: string;
+  setManufacturer?: (manufacturer: string) => void;
+  carModel?: string;
+  setCarModel?: (carModel: string) => void;
+  icon?: string;
+  inputDisplay?: string; */
 }
 
 export interface CarProps {

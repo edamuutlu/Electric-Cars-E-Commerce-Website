@@ -45,7 +45,7 @@
 /* END: Car Card styles */
 
 .home__cars_wrapper {
-  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14;
+  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-5;
 }
 
 .home__error_container {

@@ -7,8 +7,6 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { allData, getById } from "@/constans";
-import { useEffect } from "react";
 
 const Navbar = () => {
   const { data: session, status: sessionStatus }: any = useSession();
@@ -16,7 +14,7 @@ const Navbar = () => {
 
   const pathname = usePathname();
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (sessionStatus === "authenticated") {
       getById(session.user.email)
         .then((id) => {
@@ -26,7 +24,7 @@ const Navbar = () => {
           console.error(error);
         });
     }
-  }, [sessionStatus]);
+  }, [sessionStatus]); */
 
   return (
     <header className="w-full fixed z-10">
