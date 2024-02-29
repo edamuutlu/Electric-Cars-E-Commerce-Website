@@ -1,9 +1,9 @@
 .auth_container{
-    @apply h-full w-full bg-opacity-45 pt-36 px-3;
+    @apply h-full w-full bg-opacity-45 pt-20 px-3;
 }
 
 .auth_formDiv{
-    @apply bg-opacity-85 px-20  self-center mt-2 xl:w-[650px] lg:w-2/5 md:w-[450px] sm:w-[350px] rounded-xl
+    @apply bg-opacity-85 px-20 max-[430px]:px-14 self-center mt-2 xl:w-[650px] lg:w-[630px] md:w-[600px] sm:w-[550px] rounded-xl
 }
 
 .auth_input {
