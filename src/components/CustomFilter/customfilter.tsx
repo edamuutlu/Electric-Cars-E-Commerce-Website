@@ -1,22 +1,22 @@
 import { Listbox, Transition } from "@headlessui/react";
 import styles from "./customfilter.module.css";
 import { CustomFilterProps } from "@/types";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { ChevronsUpDown } from "lucide-react";
 
 const CustomFilter = ({
   yearList = [],
-  fuelList = [],
+  colors = [],
   title,
+  value,
+  onChange = () => {},
 }: CustomFilterProps) => {
-  const [selected, setSelected] = useState("");
-
   return (
     <div className="w-fit">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={value} onChange={onChange}>
         <div className="relative w-fit z-10">
           <Listbox.Button className={styles.custom_filter__btn}>
-            {selected || title}
+            {value || title}
             <ChevronsUpDown
               width={20}
               height={20}
@@ -49,12 +49,12 @@ const CustomFilter = ({
                   ))}
                 </>
               )}
-              {fuelList.length > 0 && (
+              {colors.length > 0 && (
                 <>
-                  {fuelList.map((fuel) => (
+                  {colors.map((color) => (
                     <Listbox.Option
-                      key={fuel}
-                      value={fuel}
+                      key={color}
+                      value={color}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 px-4 ${
                           active
@@ -63,7 +63,7 @@ const CustomFilter = ({
                         }`
                       }
                     >
-                      {fuel}
+                      {color}
                     </Listbox.Option>
                   ))}
                 </>

@@ -1,29 +1,70 @@
 import { client } from "@/app/lib/sanity";
-import { GET } from "@/app/api/get/route";
 
 export const allData = async () => {
   const query = `*[_type == 'product']{
     _id,
-    name,
-    description,
-    car_type,
-    tire,
-    range,
+    title,
+    brand,
+    model,
+    "slug": slug.current,
     images,
     price,
     price_id,
-    "slug": slug.current,
+    description,
     "categories": categories[]->{
       name
-    }
+    },
+    car_type,
+    tire,
+    range, 
+    year,
+    color,
   }`;
   const data = await client.fetch(query);
   return data;
 };
 
+// all Brand
 export const allCategory = async () => {
   const query = `*[_type == 'category']{
     name
+  }`;
+  const data = await client.fetch(query);
+  const sequential = data.sort((a, b) => a.name.localeCompare(b.name));
+  return sequential;
+};
+// all model
+export const allModel = async () => {
+  const query = `*[_type == 'product']{
+    brand,
+    model
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
+// all year and color
+export const allYearColor = async () => {
+  const query = `*[_type == 'product']{
+    year,
+    color
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
+
+export const getCarData = async (slug) => {
+  const query = `*[_type == 'product' && slug.current == '${slug}'][0]{
+    _id,
+      title,
+      description,
+      car_type,
+      tire,
+      range,
+      images,
+      price,
+      price_id,
+      "slug": slug.current,
+      "categories": categories->{name}
   }`;
   const data = await client.fetch(query);
   return data;
@@ -47,9 +88,8 @@ export { manufacturers };
 let carModels: string[] = []; // Boş bir dizi oluştur
 const fetchModels = async () => {
   try {
-    const data = await allCategory();
-    const names = data.map((item) => item.name);
-    carModels = names;
+    const data = await allModel();
+    carModels = data.map((item) => item);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -57,43 +97,27 @@ const fetchModels = async () => {
 fetchModels();
 export { carModels };
 
-// ALL cars
-/* let manufacturers: string[] = []; // Boş bir dizi oluştur
-const fetchData = async () => {
+// ALL Year Color
+let yearsOfProduction: string[] = [];
+let colors: string[] = ["ALL"];
+const fetchYearColor = async () => {
   try {
-    const data = await allData();
-    const names = data.map((item) => item.categories[0].name);
-    manufacturers = names;
+    const data = await allYearColor();
+    yearsOfProduction = data.map((item) => item.year);
+    yearsOfProduction = ["ALL", ...yearsOfProduction];
+
+    data.forEach((item) => {
+      item.color.forEach((color) => {
+        colors.push(color);
+      });
+    });
+    colors = [...new Set(colors)]; // tekrar eden değerleri siler
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
-fetchData();
-export { manufacturers }; */
-
-// Get By User Id
-/* export const getById = async (emailBy: string) => {
-  try {
-    const email = emailBy;
-    const response = await GET(email);
-    const byId = response._id.toString();
-    return byId;
-  } catch (error) {
-    console.error(error);
-  }
-}; */
-
-export const yearsOfProduction = [
-  { title: "2015", value: "2015" },
-  { title: "2016", value: "2016" },
-  { title: "2017", value: "2017" },
-  { title: "2018", value: "2018" },
-  { title: "2019", value: "2019" },
-  { title: "2020", value: "2020" },
-  { title: "2021", value: "2021" },
-  { title: "2022", value: "2022" },
-  { title: "2023", value: "2023" },
-];
+fetchYearColor();
+export { yearsOfProduction, colors };
 
 export const fuels = [
   {

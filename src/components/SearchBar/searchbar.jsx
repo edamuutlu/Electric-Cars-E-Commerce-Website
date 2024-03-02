@@ -1,15 +1,13 @@
 "use client";
-import { useState } from "react";
 import styles from "./searchbar.module.css";
 import SearchManufacturer from "./searchmanufacturer";
-import { SearchManufacturerProps } from "@/types";
 
 const SearchBar = ({
   manufacturer,
   setManufacturer,
   carModel,
   setCarModel,
-}: SearchManufacturerProps) => {
+}) => {
   return (
     <aside className={styles.searchbar}>
       <div className={styles.searchbar__item}>
@@ -22,6 +20,7 @@ const SearchBar = ({
       </div>
       <div className={styles.searchbar__item}>
         <SearchManufacturer
+          carBrand={manufacturer}
           carModel={carModel}
           setCarModel={setCarModel}
           icon={"model-icon.png"}

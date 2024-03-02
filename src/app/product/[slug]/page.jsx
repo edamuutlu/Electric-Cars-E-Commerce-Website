@@ -6,27 +6,10 @@ import CustomButtom from "./../../../components/custombuttom/custombuttom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddToCart from "@/components/addToCart/addToCart";
-
-const getData = async (slug) => {
-  const query = `*[_type == 'product' && slug.current == '${slug}'][0]{
-    _id,
-      name,
-      description,
-      car_type,
-      tire,
-      range,
-      images,
-      price,
-      price_id,
-      "slug": slug.current,
-      "categories": categories->{name}
-  }`;
-  const data = await client.fetch(query);
-  return data;
-};
+import { getCarData } from "@/constans";
 
 const ProductDetails = async ({ params }) => {
-  const car = await getData(params.slug);
+  const car = await getCarData(params.slug);
 
   return (
     <section className="pt-32 pb-16">
@@ -55,8 +38,13 @@ const ProductDetails = async ({ params }) => {
             </Link>
             <div className="flex flex-col  gap-6 items-start">
               <div>
-                <h1 className="text-xl py-2 px-3 font-extrabold">{car.name}</h1>
-                <p className="text-lg px-3 font-bold">TL {car.price}</p>
+                <h1 className="text-xl py-2 px-3 font-extrabold">
+                  {car.title}
+                </h1>
+                <p className="text-lg px-3 font-bold">
+                  {car.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                  TL
+                </p>
               </div>
               <p className="text-black-100 px-3 font-medium">
                 {car.description}

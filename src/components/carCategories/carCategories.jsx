@@ -6,40 +6,53 @@ import CarCard from "@/components/CarCard/carCard";
 import styles from "./carCategories.module.css";
 import { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
-import { Input } from "@/components/ui/input";
-import { yearsOfProduction, fuels } from "@/constans";
-import { FaLiraSign } from "react-icons/fa";
+import { yearsOfProduction, colors } from "@/constans";
 import PriceBox from "../PriceBox/priceBox";
+import { model } from "mongoose";
+import ShowMore from "../ShowMore/showMore";
 
 const CarCategories = ({ cars }) => {
-  const yearList = yearsOfProduction.map((item) => item.value);
-  const fuelList = fuels.map((item) => item.value);
-  const [manufacturer, setManufacturer] = useState("all");
-  const [carModel, setCarModel] = useState("model-y3");
+  const yearList = yearsOfProduction;
+  const colorList = colors;
+  const [manufacturer, setManufacturer] = useState("ALL");
+  const [carModel, setCarModel] = useState("");
   const [filterCar, setFilterCars] = useState([]);
   const [price, setPrice] = useState("0");
   const [maxPrice, setMaxPrice] = useState(5000000);
   const [year, setYear] = useState("");
+  const [color, setColor] = useState("");
+  const [limit, setLimit] = useState(1);
+  const [carLenght, setCarLenght] = useState(0);
 
   useEffect(() => {
     const filtered = cars.filter((car) => {
       const categoryMatch =
-        manufacturer === "all"
+        manufacturer === "ALL"
           ? cars
           : car.categories.some((categ) => categ.name === manufacturer);
+      const modelMatch =
+        carModel === "" || carModel === "ALL" ? cars : car.model === carModel;
       const priceMatch = car.price >= price && car.price <= maxPrice;
-      console.log(priceMatch);
-      return categoryMatch && priceMatch;
+      const yearMatch =
+        year === "ALL" || year === "" ? true : car.year === year;
+      const colorMatch =
+        color === "ALL" || color === ""
+          ? true
+          : car.color.some((clr) => clr === color);
+      return (
+        categoryMatch && priceMatch && modelMatch && yearMatch && colorMatch
+      );
     });
-    setFilterCars(filtered);
-  }, [manufacturer, price, cars]);
-  console.log(filterCar);
+    setCarLenght(filtered.length); // toplam araba sayısı
+
+    const firstTenCars = filtered.slice(0, limit);
+    setFilterCars(firstTenCars);
+  }, [manufacturer, carModel, year, color, price, cars, limit, carLenght]);
 
   return (
     <>
       <div className={styles.home__filters}>
         <SearchBar
-          cars={cars}
           manufacturer={manufacturer}
           setManufacturer={setManufacturer}
           carModel={carModel}
@@ -65,12 +78,34 @@ const CarCategories = ({ cars }) => {
               onValueChange={(val) => setPrice(val[0])}
             />
           </div>
-          <CustomFilter title="Year" yearList={yearList} />
-          <CustomFilter title="Fuel" fuelList={fuelList} />
+          <CustomFilter
+            title="Year"
+            yearList={yearList}
+            value={year}
+            onChange={setYear}
+          />
+          <CustomFilter
+            title="Colors"
+            colors={colorList}
+            value={color}
+            onChange={setColor}
+          />
         </div>
       </div>
 
-      <CarCard cars={filterCar} filterCarLenght={filterCar.length} />
+      <CarCard
+        cars={filterCar}
+        filterCarLenght={filterCar.length}
+        brand={manufacturer}
+        model={carModel}
+      />
+
+      <ShowMore
+        isNext={carLenght > limit}
+        limit={limit}
+        onChange={setLimit}
+        maxLimit={carLenght}
+      />
     </>
   );
 };

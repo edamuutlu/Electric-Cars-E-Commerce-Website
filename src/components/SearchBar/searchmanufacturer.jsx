@@ -1,23 +1,22 @@
 "use client";
 import { Combobox, Transition } from "@headlessui/react";
 import styles from "./searchbar.module.css";
-import { SearchManufacturerProps } from "@/types";
 import { manufacturers, carModels } from "@/constans";
 import Image from "next/image";
 import { useState, Fragment } from "react";
 
 const SearchManufacturer = ({
+  carBrand,
   manufacturer,
   setManufacturer,
   carModel,
   setCarModel,
   icon,
   inputDisplay,
-}: SearchManufacturerProps) => {
+}) => {
   const [query, setQuery] = useState("");
 
   let filteredOptions = [];
-
   if (manufacturer) {
     filteredOptions =
       query === ""
@@ -29,10 +28,25 @@ const SearchManufacturer = ({
               .includes(query.toLowerCase().replace(/\s+/g, ""))
           );
   } else {
+    let models = ["ALL"];
+    carModels.forEach((item) => {
+      if (carBrand === "ALL") {
+        if (item.brand && item.model) {
+          models.push(item.model);
+        }
+      } else if (
+        carBrand &&
+        item.brand &&
+        item.model &&
+        carBrand.toLowerCase() === item.brand.toLowerCase()
+      ) {
+        models.push(item.model);
+      }
+    });
     filteredOptions =
       query === ""
-        ? carModels
-        : carModels.filter((item) =>
+        ? models
+        : models.filter((item) =>
             item
               .toLowerCase()
               .replace(/\s+/g, "")
@@ -70,7 +84,7 @@ const SearchManufacturer = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options>
+            <Combobox.Options className={styles.search_manufacturer__options}>
               {filteredOptions.length === 0 && query !== "" ? (
                 <Combobox.Option
                   value={query}
@@ -91,7 +105,7 @@ const SearchManufacturer = ({
                     {({ selected, active }) => (
                       <>
                         <span
-                          className={`block truncate ${
+                          className={`block truncate uppercase ${
                             selected ? "font-medium" : "font-normal"
                           }`}
                         >

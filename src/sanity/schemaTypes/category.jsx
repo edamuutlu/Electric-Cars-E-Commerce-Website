@@ -8,5 +8,11 @@ export default {
       title: 'category Name',
       type: 'string',
     },
+    {
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'product'}}],
+    },
   ],
 }
