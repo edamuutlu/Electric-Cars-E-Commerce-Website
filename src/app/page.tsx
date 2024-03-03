@@ -10,7 +10,9 @@ export default async function Home() {
 
   return (
     <div className="overflow-hidden">
-      <Hero />
+      <div id="home">
+        <Hero />
+      </div>
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className={styles.home__text_container}>
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
