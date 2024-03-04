@@ -9,28 +9,13 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-const Navbar = ( {userId} ) => {
+const Navbar = ({ userId = "" }) => {
   const { data: session, status: sessionStatus }: any = useSession();
   const { cartCount, handleCartClick } = useShoppingCart();
 
   const pathname = usePathname();
 
-  useEffect(() => {
-    // userId değiştiğinde bu blok çalışır
-    console.log('Navbar componentinde userId:', userId);
-  }, [userId]);
-
-  /*  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      getById(session.user.email)
-        .then((id) => {
-          console.log(id);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [sessionStatus]); */
+  console.log(userId);
 
   return (
     <header className="w-full fixed z-10">

@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import Hero from "@/components/Hero/hero";
 import NavigateSideMenu from "@/components/NavigateSideMenu/navigateSideMenu";
-import { ObjectId } from "mongodb";
+import { findUserId } from "@/constans/findUserId";
 
 //get data
 import CarCategories from "@/components/carCategories/carCategories";
@@ -10,6 +10,7 @@ import User from "@/models/User";
 
 export default async function Home() {
   const cars = await allData();
+  const userId = await findUserId();
 
   return (
     <div className="overflow-hidden">

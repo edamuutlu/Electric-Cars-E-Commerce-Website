@@ -8,21 +8,10 @@ import CustomButtom from "../custombuttom/custombuttom";
 import AddToCart from "../addToCart/addToCart";
 
 const Car = ({ car }) => {
-  /* const carObject = {
-    id: car._id,
-    title: car.title,
-    currency: "TL",
-    description: car.description,
-    images: car.images,
-    price: car.price,
-    price_id: car.price_id,
-    slug: car.slug,
-  }; */
-
   return (
     <div key={car._id} className={`${styles.car_card} group`}>
       <div className={styles.car_card__content}>
-        <h2 className={styles.car_card__content}>{car.title}</h2>
+        <h4 className={styles.car_card__content}>{car.title}</h4>
       </div>
 
       <p className="flex mt-6 text-[32px] font-extrabold">
