@@ -52,6 +52,7 @@ export const allYearColor = async () => {
   return data;
 };
 
+// Product Details
 export const getCarData = async (slug) => {
   const query = `*[_type == 'product' && slug.current == '${slug}'][0]{
     _id,
@@ -64,7 +65,13 @@ export const getCarData = async (slug) => {
       price,
       price_id,
       "slug": slug.current,
-      "categories": categories->{name}
+      "categories": categories->{name},
+      battery,
+      chassis_type,
+      range,
+      engine,
+      consumption,
+      charge
   }`;
   const data = await client.fetch(query);
   return data;

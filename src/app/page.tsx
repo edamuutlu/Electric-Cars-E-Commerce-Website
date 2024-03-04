@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import Hero from "@/components/Hero/hero";
+import NavigateSideMenu from "@/components/NavigateSideMenu/navigateSideMenu";
 
 //get data
 import CarCategories from "@/components/carCategories/carCategories";
@@ -10,6 +11,7 @@ export default async function Home() {
 
   return (
     <div className="overflow-hidden">
+      <NavigateSideMenu />
       <div id="home">
         <Hero />
       </div>

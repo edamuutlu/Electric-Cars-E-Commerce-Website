@@ -6,7 +6,6 @@ import Footer from "@/components/Footer/footer";
 import Navbar from "@/components/Navbar/navbar";
 import CartProvider from "@/components/CartSidebar/cartProvider";
 import { ToastContainer } from "react-toastify";
-import NavigateSideMenu from "@/components/NavigateSideMenu/navigateSideMenu";
 
 export const metadata: Metadata = {
   title: "E-Cars",
@@ -25,7 +24,6 @@ export default async function RootLayout({
       <body>
         <SessionProvider session={session}>
           <CartProvider>
-            <NavigateSideMenu />
             <Navbar />
             {children}
             <ToastContainer stacked />
