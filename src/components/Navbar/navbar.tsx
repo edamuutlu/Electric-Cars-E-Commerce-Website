@@ -7,12 +7,18 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ( {userId} ) => {
   const { data: session, status: sessionStatus }: any = useSession();
   const { cartCount, handleCartClick } = useShoppingCart();
 
   const pathname = usePathname();
+
+  useEffect(() => {
+    // userId değiştiğinde bu blok çalışır
+    console.log('Navbar componentinde userId:', userId);
+  }, [userId]);
 
   /*  useEffect(() => {
     if (sessionStatus === "authenticated") {

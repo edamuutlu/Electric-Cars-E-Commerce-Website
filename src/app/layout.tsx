@@ -6,6 +6,8 @@ import Footer from "@/components/Footer/footer";
 import Navbar from "@/components/Navbar/navbar";
 import CartProvider from "@/components/CartSidebar/cartProvider";
 import { ToastContainer } from "react-toastify";
+import User from "@/models/User";
+import { findUserId } from "@/constans/findUserId";
 
 export const metadata: Metadata = {
   title: "E-Cars",
@@ -18,13 +20,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
+  const userId = await findUserId();
+  console.log(userId);
 
   return (
     <html lang="en">
       <body>
         <SessionProvider session={session}>
           <CartProvider>
-            <Navbar />
+            <Navbar userId={userId}/>
             {children}
             <ToastContainer stacked />
             <Footer />
