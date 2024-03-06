@@ -7,7 +7,6 @@ import { ChevronLeft } from "lucide-react";
 import { urlFor } from "@/app/lib/sanity";
 import "react-toastify/dist/ReactToastify.css";
 import { getCarData } from "@/constans";
-import { Tab } from "@headlessui/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
@@ -18,6 +17,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import ProductCarVitrin from "./../../../components/ProductCarVitrin/productCarVitrin";
 import CarInfoTable from "./../../../components/CarInfoTable/carInfoTable";
+import CarTechnicalDetils from "./../../../components/CarTechnicalDetils/carTechnicalDetils";
 
 const ProductDetails = ({ params }) => {
   const [car, setCar] = useState(null);
@@ -33,7 +33,27 @@ const ProductDetails = ({ params }) => {
   }, [params.slug]);
 
   if (!car) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loader">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <img
+            src="ecar_logo.png"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+            }}
+          />
+        </div>
+      </div>
+    );
   }
 
   const images = [
@@ -121,19 +141,12 @@ const ProductDetails = ({ params }) => {
           </div>
         </div>
         {/* Car Technical Specifications */}
-        <div>Car Technical Specifications</div>
-        <Tab.Group>
-          <Tab.List>
-            <Tab>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-          </Tab.List>
-          <Tab.Panels>
-            <Tab.Panel>Content 1</Tab.Panel>
-            <Tab.Panel>Content 2</Tab.Panel>
-            <Tab.Panel>Content 3</Tab.Panel>
-          </Tab.Panels>
-        </Tab.Group>
+        <div className="px-8">
+          <h4 className="text-center my-2">
+            {car.title} technical specifications
+          </h4>
+          <CarTechnicalDetils car={car} />
+        </div>
       </div>
     </section>
   );

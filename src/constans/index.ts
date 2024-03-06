@@ -71,7 +71,29 @@ export const getCarData = async (slug) => {
       range,
       engine,
       consumption,
-      charge
+      charge,
+      engine_power,
+      tork,
+      maximum_speed,
+      zero_hundred,
+      engine_size,
+      driving_system,
+      engine_type,
+      dc_speed,
+      ac_speed,
+      dc_time,
+      ac_time,
+      weight,
+      length,
+      width,
+      height,
+      luggage,
+      color,
+      year,
+      driving,
+      location,
+      security,
+      other
   }`;
   const data = await client.fetch(query);
   return data;

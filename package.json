@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
     "@headlessui/react": "^1.7.18",
+    "@nextui-org/table": "^2.0.28",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-slider": "^1.1.2",
