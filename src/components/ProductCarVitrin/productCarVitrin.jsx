@@ -14,7 +14,7 @@ const ProductCarVitrin = ({car}) => {
       <AddToCart
         /* id={car._id} */
         price_id={car.price_id}
-        name={car.name}
+        name={car.title}
         currency="TL"
         description={car.description}
         images={car.images}
