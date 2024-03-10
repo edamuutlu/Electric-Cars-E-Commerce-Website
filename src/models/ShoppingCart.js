@@ -5,13 +5,13 @@ const { Schema } = mongoose;
 const shoppingcartSchema = new Schema(
   {
     userId: {
-      type: Number,
+      type: String,
       unique: true, 
       required: true,
     },
     productId: {
-      type: Number,
-      unique: true,
+      type: [String],
+      unique: false,
       required: false,
     },
   },

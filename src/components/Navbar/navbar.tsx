@@ -7,12 +7,30 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { saveCartData } from "@/constans/saveCartData";
+import { useEffect } from "react";
 
 const Navbar = ({ userId = "" }) => {
   const { data: session, status: sessionStatus }: any = useSession();
   const { cartCount, handleCartClick } = useShoppingCart();
 
   const pathname = usePathname();
+
+  const {
+    cartDetails,
+  } = useShoppingCart();
+
+  let productIds = [];
+  Object.entries(cartDetails).map(([key, item]) => {
+    productIds.push(item.id);
+  });
+
+  useEffect(() => {
+    const fetchCarData = async () => {
+      const carData = await saveCartData(productIds);
+    };
+    fetchCarData();
+  }, [productIds]);
 
   return (
     <header className="w-full fixed z-10">

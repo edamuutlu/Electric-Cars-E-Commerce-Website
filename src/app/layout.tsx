@@ -21,36 +21,36 @@ export default async function RootLayout({
   const session = await getServerSession();
   const userId = await findUserId();
 
-  /* if (isUserId === null) {
-    // Login Girişi Yapılmamış
-    console.log("Giriş yapılmadı.");
-  } else {
-    // Login girişi yapılmış
-    console.log("Giriş yapıldı.");
-    console.log(isUserId);
-    // Databaseden bu kullanıcının sepet ürünlerini getir
-    const fetchCartItems = async (userId) => {
-      // Veritabanına bağlanma
-      const db = "";
+  // if (isUserId === null) {
+  //   Login Girişi Yapılmamış
+  //   console.log("Giriş yapılmadı.");
+  // } else {
+  //   Login girişi yapılmış
+  //   console.log("Giriş yapıldı.");
+  //   console.log(isUserId);
+  //   Databaseden bu kullanıcının sepet ürünlerini getir
+  //   const fetchCartItems = async (userId) => {
+  //     Veritabanına bağlanma
+  //     const db = "";
     
-      // Ürünleri sorgulama
-      const sql = `SELECT * FROM products WHERE cart_id = ${userId}`;
-      const results = await db.query(sql);
+  //     Ürünleri sorgulama
+  //     const sql = `SELECT * FROM products WHERE cart_id = ${userId}`;
+  //     const results = await db.query(sql);
     
-      // Ürünleri işleme
-      const cartItems = results.map((item) => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        price_id: item.price_id,
-        quantity: item.quantity,
-      }));
+  //     Ürünleri işleme
+  //     const cartItems = results.map((item) => ({
+  //       id: item.id,
+  //       name: item.name,
+  //       price: item.price,
+  //       price_id: item.price_id,
+  //       quantity: item.quantity,
+  //     }));
     
-      // Ürünleri sepete ekleme
-      const { addItem } = useShoppingCart();
-      cartItems.forEach((item) => addItem(item));
-    };
-  } */
+  //     Ürünleri sepete ekleme
+  //     const { addItem } = useShoppingCart();
+  //     cartItems.forEach((item) => addItem(item));
+  //   };
+  // }
 
   return (
     <html lang="en">

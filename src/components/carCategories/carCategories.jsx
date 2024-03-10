@@ -17,10 +17,10 @@ const CarCategories = ({ cars, isSessionId }) => {
   const [carModel, setCarModel] = useState("");
   const [filterCar, setFilterCars] = useState([]);
   const [price, setPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState(5000000);
+  const [maxPrice, setMaxPrice] = useState(9000000);
   const [year, setYear] = useState("");
   const [color, setColor] = useState("");
-  const [limit, setLimit] = useState(1);
+  const [limit, setLimit] = useState(8);
   const [carLenght, setCarLenght] = useState(0);
 
   useEffect(() => {
