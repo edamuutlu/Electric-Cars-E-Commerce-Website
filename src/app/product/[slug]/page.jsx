@@ -147,6 +147,9 @@ const ProductDetails = ({ params }) => {
           </h4>
           <CarTechnicalDetils car={car} />
         </div>
+
+        {/* Car Slider */}
+        
       </div>
     </section>
   );

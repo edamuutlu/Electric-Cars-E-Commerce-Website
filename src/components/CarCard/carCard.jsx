@@ -3,7 +3,7 @@
 import styles from "./carcard.module.css";
 import Car from "./car";
 
-const CarCard = ({ cars, filterCarLenght, brand, model }) => {
+const CarCard = ({ cars, filterCarLenght, brand, model, isSessionId }) => {
   return (
     <div>
       {cars ? (
@@ -26,7 +26,7 @@ const CarCard = ({ cars, filterCarLenght, brand, model }) => {
           </span>
           <div className={styles.home__cars_wrapper}>
             {cars?.map((car) => (
-              <Car key={car._id} car={car} />
+              <Car key={car._id} car={car} isSessionId={isSessionId} />
             ))}
           </div>
         </section>

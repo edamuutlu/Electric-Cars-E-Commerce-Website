@@ -5,7 +5,6 @@ import { useShoppingCart } from "use-shopping-cart";
 import Link from "next/link";
 
 const CartItem = ({ item, open }) => {
-  console.log(item);
   const { removeItem, incrementItem, decrementItem } = useShoppingCart();
   return (
     <div className="flex w-full justify-between mb-4 items-center h-[120px] border-b">

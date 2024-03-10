@@ -3,13 +3,13 @@ import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const AddToCart = ({
   title,
   containerStyles,
   textStyles,
   rightIcon,
-  id,
   name,
   currency,
   description,
@@ -21,7 +21,6 @@ const AddToCart = ({
   const { addItem } = useShoppingCart();
 
   const carObject = {
-    id: id,
     name: name,
     currency: currency,
     description: description,
@@ -50,7 +49,6 @@ const AddToCart = ({
         onClick={() => {
           addItem(carObject);
           notify();
-          console.log(carObject);
         }}
       >
         <span className={`flex-1 ${textStyles}`}>{title}</span>

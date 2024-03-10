@@ -8,10 +8,9 @@ import { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { yearsOfProduction, colors } from "@/constans";
 import PriceBox from "../PriceBox/priceBox";
-import { model } from "mongoose";
 import ShowMore from "../ShowMore/showMore";
 
-const CarCategories = ({ cars }) => {
+const CarCategories = ({ cars, isSessionId }) => {
   const yearList = yearsOfProduction;
   const colorList = colors;
   const [manufacturer, setManufacturer] = useState("ALL");
@@ -98,6 +97,7 @@ const CarCategories = ({ cars }) => {
         filterCarLenght={filterCar.length}
         brand={manufacturer}
         model={carModel}
+        isSessionId={isSessionId}
       />
 
       <ShowMore

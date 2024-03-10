@@ -12,7 +12,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import CheckoutBtn from "../CheckoutBtn/checkoutBtn";
 import CustomButtom from "./../custombuttom/custombuttom";
 
-const CartSidebar = () => {
+const CartSidebar = ({ isUserId }) => {
   const {
     cartCount,
     cartDetails,
@@ -53,7 +53,7 @@ const CartSidebar = () => {
                 {totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} TL
               </div>
             </div>
-            <CheckoutBtn />
+            <CheckoutBtn isUserId={isUserId} />
             <CustomButtom
               title="Clear to Cart"
               containerStyles="py-4 mt-3 text-white uppercase bg-black hover:bg-black-100 

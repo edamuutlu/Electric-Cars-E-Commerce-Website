@@ -6,7 +6,6 @@ import { findUserId } from "@/constans/findUserId";
 //get data
 import CarCategories from "@/components/carCategories/carCategories";
 import { allData } from "@/constans";
-import User from "@/models/User";
 
 export default async function Home() {
   const cars = await allData();
@@ -23,7 +22,7 @@ export default async function Home() {
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
           <p>Explore the cars you might like</p>
         </div>
-        <CarCategories cars={cars} />
+        <CarCategories cars={cars} isSessionId={userId} />
       </div>
     </div>
   );

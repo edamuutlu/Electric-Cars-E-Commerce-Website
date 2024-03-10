@@ -7,15 +7,12 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 const Navbar = ({ userId = "" }) => {
   const { data: session, status: sessionStatus }: any = useSession();
   const { cartCount, handleCartClick } = useShoppingCart();
 
   const pathname = usePathname();
-
-  console.log(userId);
 
   return (
     <header className="w-full fixed z-10">
@@ -93,7 +90,7 @@ const Navbar = ({ userId = "" }) => {
           </div>
 
           {/* cardSidebar */}
-          <CartSidebar />
+          <CartSidebar isUserId={userId} />
         </div>
       </nav>
     </header>

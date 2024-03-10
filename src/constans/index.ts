@@ -17,10 +17,12 @@ export const allData = async () => {
     car_type,
     tire,
     range, 
-    year,
     color,
+    year,
+    
   }`;
   const data = await client.fetch(query);
+  console.log(data);
   return data;
 };
 
@@ -30,7 +32,9 @@ export const allCategory = async () => {
     name
   }`;
   const data = await client.fetch(query);
-  const sequential = data.sort((a, b) => a.name.localeCompare(b.name));
+  const sequential = data.sort((a: any, b: any) =>
+    a.name.localeCompare(b.name)
+  );
   return sequential;
 };
 // all model
@@ -53,7 +57,7 @@ export const allYearColor = async () => {
 };
 
 // Product Details
-export const getCarData = async (slug) => {
+export const getCarData = async (slug: any) => {
   const query = `*[_type == 'product' && slug.current == '${slug}'][0]{
     _id,
       title,
@@ -104,7 +108,7 @@ let manufacturers: string[] = []; // Boş bir dizi oluştur
 const fetchData = async () => {
   try {
     const data = await allCategory();
-    const names = data.map((item) => item.name);
+    const names = data.map((item: any) => item.name);
     manufacturers = names;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -118,7 +122,7 @@ let carModels: string[] = []; // Boş bir dizi oluştur
 const fetchModels = async () => {
   try {
     const data = await allModel();
-    carModels = data.map((item) => item);
+    carModels = data.map((item: any) => item);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -132,11 +136,11 @@ let colors: string[] = ["ALL"];
 const fetchYearColor = async () => {
   try {
     const data = await allYearColor();
-    yearsOfProduction = data.map((item) => item.year);
+    yearsOfProduction = data.map((item: any) => item.year);
     yearsOfProduction = ["ALL", ...yearsOfProduction];
 
-    data.forEach((item) => {
-      item.color.forEach((color) => {
+    data.forEach((item: any) => {
+      item.color.forEach((color: any) => {
         colors.push(color);
       });
     });
