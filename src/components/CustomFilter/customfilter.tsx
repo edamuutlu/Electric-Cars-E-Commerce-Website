@@ -1,7 +1,7 @@
 import { Listbox, Transition } from "@headlessui/react";
 import styles from "./customfilter.module.css";
 import { CustomFilterProps } from "@/types";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { ChevronsUpDown } from "lucide-react";
 
 const CustomFilter = ({
