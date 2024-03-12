@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { urlFor } from "@/app/lib/sanity";
 import "react-toastify/dist/ReactToastify.css";
-import { getCarData } from "@/constans";
+import { allData, getCarData } from "@/constans";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
@@ -18,15 +18,19 @@ import "swiper/css/thumbs";
 import ProductCarVitrin from "./../../../components/ProductCarVitrin/productCarVitrin";
 import CarInfoTable from "./../../../components/CarInfoTable/carInfoTable";
 import CarTechnicalDetils from "./../../../components/CarTechnicalDetils/carTechnicalDetils";
+import CarAlternatives from "./../../../components/CarAlternatives/carAlternatives";
 
 const ProductDetails = ({ params }) => {
   const [car, setCar] = useState(null);
+  const [cars, setCars] = useState(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
     const fetchCarData = async () => {
       const carData = await getCarData(params.slug);
+      const allCars = await allData();
       setCar(carData);
+      setCars(allCars);
     };
 
     fetchCarData();
@@ -45,7 +49,7 @@ const ProductDetails = ({ params }) => {
           }}
         >
           <img
-            src="ecar_logo.png"
+            src="/ecar_logo.png"
             style={{
               maxWidth: "100%",
               maxHeight: "100%",
@@ -135,7 +139,7 @@ const ProductDetails = ({ params }) => {
             {/* Car title, price, description, addToCart */}
             <ProductCarVitrin car={car} />
             {/* Car info */}
-            <div className="flex flex-col w-full gap-3">
+            <div className="flex flex-col w-full gap-1">
               <CarInfoTable car={car} />
             </div>
           </div>
@@ -149,7 +153,15 @@ const ProductDetails = ({ params }) => {
         </div>
 
         {/* Car Slider */}
-        
+        <div className="px-8">
+          <h4 className="text-center my-2">{car.title} alternatives</h4>
+          <CarAlternatives
+            cars={cars}
+            carBrand={car.brand}
+            carModel={car.model}
+            chassisType={car.chassis_type}
+          />
+        </div>
       </div>
     </section>
   );

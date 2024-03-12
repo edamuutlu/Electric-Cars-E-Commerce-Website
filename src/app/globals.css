@@ -55,3 +55,7 @@ h5 {
 .btn {
   @apply flex justify-center items-center h-[50px] px-8 text-white font-semibold uppercase;
 }
+
+.populer_car .swiper-wrapper {
+  @apply !h-[690px];
+}

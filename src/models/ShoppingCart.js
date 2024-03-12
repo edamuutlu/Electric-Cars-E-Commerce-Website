@@ -18,4 +18,5 @@ const shoppingcartSchema = new Schema(
   { timestamps: true }
 );
 
+
 export default mongoose.models.ShoppingCart || mongoose.model("shoppingCart", shoppingcartSchema);

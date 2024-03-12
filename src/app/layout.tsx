@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/navbar";
 import CartProvider from "@/components/CartSidebar/cartProvider";
 import { ToastContainer } from "react-toastify";
 import { findUserId } from "@/constans/findUserId";
+import ShoppingCart from "./../models/ShoppingCart";
 
 export const metadata: Metadata = {
   title: "E-Cars",
@@ -32,11 +33,11 @@ export default async function RootLayout({
   //   const fetchCartItems = async (userId) => {
   //     Veritabanına bağlanma
   //     const db = "";
-    
+
   //     Ürünleri sorgulama
   //     const sql = `SELECT * FROM products WHERE cart_id = ${userId}`;
   //     const results = await db.query(sql);
-    
+
   //     Ürünleri işleme
   //     const cartItems = results.map((item) => ({
   //       id: item.id,
@@ -45,7 +46,7 @@ export default async function RootLayout({
   //       price_id: item.price_id,
   //       quantity: item.quantity,
   //     }));
-    
+
   //     Ürünleri sepete ekleme
   //     const { addItem } = useShoppingCart();
   //     cartItems.forEach((item) => addItem(item));

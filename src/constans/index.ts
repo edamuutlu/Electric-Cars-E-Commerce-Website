@@ -16,13 +16,15 @@ export const allData = async () => {
     },
     car_type,
     tire,
-    range, 
     color,
+    range, 
     year,
-    
+    battery,
+    chassis_type,
+    range,
+    engine,
   }`;
   const data = await client.fetch(query);
-  console.log(data);
   return data;
 };
 
@@ -70,6 +72,8 @@ export const getCarData = async (slug: any) => {
       price_id,
       "slug": slug.current,
       "categories": categories->{name},
+      brand,
+      model,
       battery,
       chassis_type,
       range,
