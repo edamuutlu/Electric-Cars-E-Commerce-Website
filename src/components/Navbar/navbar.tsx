@@ -16,17 +16,19 @@ const Navbar = ({ userId = ""}) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  let productIds: any[] = [];
-  Object.entries(cartDetails).map(([key, item]) => {
-    productIds.push(item.id);
-  });
 
-  var products = productIds.toString();
   const handleLogout = () => {
     router.push('/savecartdata');
   };
-  
 
+  /* let productIds = [];
+
+    Object.entries(cartDetails).map(([key, item]) => {
+        productIds.push(item.id);
+    });
+
+    console.log("Product IDs: ", productIds.toString()); */
+  
   return (
     <header className="w-full fixed z-10">
       <nav className="max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
@@ -104,5 +106,7 @@ const Navbar = ({ userId = ""}) => {
     </header>
   );
 };
+
+
 
 export default Navbar;

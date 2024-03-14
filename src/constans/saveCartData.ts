@@ -1,9 +1,10 @@
 import ShoppingCart from "@/models/ShoppingCart";
 
-export const saveData = ({userId = "", }) => {
+export const saveData = ({ userId = "", productIds = [] }) => {
+
     const newShoppingCart = new ShoppingCart({
-        userId: "kullanıcı_id103222",
-        productId: ["ürün_idsi_buraya_"],
+        userId: userId,
+        productId: ["deneme"],
     });
 
     // Alışveriş sepeti öğesini kaydedin

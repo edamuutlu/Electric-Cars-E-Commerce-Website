@@ -1,15 +1,24 @@
 "use client";
 import { signOut } from "next-auth/react";
+import ProductList from './productList';
 
 const ExitPage = () => {
-    const handleLogout = () => {
+  
+
+    const productIds = ProductList();
+    console.log(productIds); // productIds dizisi burada kullanılabilir
+     
+
+
+    /* const handleLogout = () => {
         signOut({
           callbackUrl: '/login', // Yönlendirme yapılacak sayfanın URL'si
         });
       };
-      handleLogout();
+      console.log("çıktım");
+      handleLogout(); */
     return ( 
-        <div></div>
+      <div>{productIds}</div>
      );
 }
  
