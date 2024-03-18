@@ -11,14 +11,20 @@ const ExitPage = () => {
     if (!initialized) {
       clearCart();
       setInitialized(true);
+
+      // Local storage'daki persist:root içeriğini temizle
+      localStorage.removeItem("persist:root");
     }
-  }, [clearCart]);
+  }, [clearCart, initialized]);
+
   const handleLogout = () => {
     signOut({
       callbackUrl: "/login", // Yönlendirme yapılacak sayfanın URL'si
     });
   };
+
   handleLogout();
+
   return <div></div>;
 };
 
