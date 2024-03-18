@@ -14,7 +14,7 @@ export default async function Home() {
   const userId = await findUserId();
   const products = await findProduct();
 
-  if (userId !== null) {
+  if (userId !== null && products !== null) {
     cartCars = cars.filter((car: any) =>
       products.some((item: any) => car.price_id === item)
     );

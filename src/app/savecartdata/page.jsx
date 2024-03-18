@@ -34,7 +34,6 @@ const SaveCartData = async () => {
     );
   } catch (error) {
     console.error("Error:", error);
-    // Hata durumunda uygun bir işlem yapılabilir
   }
 };
 

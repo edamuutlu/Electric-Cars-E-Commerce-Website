@@ -1,4 +1,3 @@
-import { car_ids } from "./carIds";
 import fs from "fs";
 
 export const GET = async () => {
@@ -78,7 +77,7 @@ export const DELETE = async (req: Request) => {
 
     // Belirtilen price_id'ye sahip öğeyi bul ve kaldır
     const indexToRemove = carIds.findIndex(
-      (item) => item.price_id === price_id
+      (item: any) => item.price_id === price_id
     );
     if (indexToRemove === -1) {
       return new Response(JSON.stringify({ error: "Item not found" }), {

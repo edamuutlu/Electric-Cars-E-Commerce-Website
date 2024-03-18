@@ -10,7 +10,7 @@ export const findProduct = async () => {
         if (product) {
           return product.productId;
         } else {
-          console.log("Kullanıcı bulunamadı.");
+          return null;
         }
       } catch (err) {
         console.error("Hata:", err);

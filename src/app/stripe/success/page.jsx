@@ -2,17 +2,24 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import CustomButtom from "@/components/custombuttom/custombuttom";
-import { useState } from "react";
-import { deleteProduct } from "@/constans/deleteProduct";
+import { useEffect, useState } from "react";
 
 const SuccessPage = () => {
-  const { data: session, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
   const [initialized, setInitialized] = useState(false);
-  if (!initialized) {
-    localStorage.removeItem("persist:root");
-    /* deleteProduct(); */
-    setInitialized(true);
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      if (sessionStatus === "authenticated") {
+        if (!initialized) {
+          console.log(sessionStatus);
+          localStorage.removeItem("phersist:root");
+          setInitialized(true);
+        }
+      }
+    };
+
+    fetchData();
+  }, [initialized, sessionStatus]);
 
   if (sessionStatus === "loading") {
     return (
