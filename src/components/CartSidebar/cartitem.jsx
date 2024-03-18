@@ -36,6 +36,15 @@ const CartItem = ({ item, open }) => {
     await deleteCartItem(price_id);
   };
 
+  const handleDecrementItem = async (price_id, count) => {
+    if (count > 1) {
+      decrementItem(price_id);
+    } else {
+      removeItem(price_id);
+      await deleteCartItem(price_id);
+    }
+  };
+
   return (
     <div className="flex w-full justify-between mb-4 items-center h-[120px] border-b">
       {/* image */}
@@ -65,7 +74,7 @@ const CartItem = ({ item, open }) => {
         {/* increment decrement item price */}
         <div className="flex items-center justify-between">
           <div className="flex gap-4">
-            <button onClick={() => decrementItem(item.id)}>
+            <button onClick={() => handleDecrementItem(item.id, item.quantity)}>
               <FaMinus className="text-[10px]" />
             </button>
             <div className="font-semibold">{item.quantity}</div>
