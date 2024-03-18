@@ -5,30 +5,21 @@ import CustomButtom from "../custombuttom/custombuttom";
 import { CgShoppingBag } from "react-icons/cg";
 import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-const Navbar = ({ userId = ""}) => {
+const Navbar = ({ userId = "" }) => {
   const { data: session, status: sessionStatus }: any = useSession();
   const { cartCount, handleCartClick, cartDetails } = useShoppingCart();
 
   const pathname = usePathname();
   const router = useRouter();
 
-
   const handleLogout = () => {
-    router.push('/savecartdata');
+    router.push("/savecartdata");
   };
 
-  /* let productIds = [];
-
-    Object.entries(cartDetails).map(([key, item]) => {
-        productIds.push(item.id);
-    });
-
-    console.log("Product IDs: ", productIds.toString()); */
-  
   return (
     <header className="w-full fixed z-10">
       <nav className="max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
@@ -49,24 +40,26 @@ const Navbar = ({ userId = ""}) => {
                 <CustomButtom
                   title="Sing In"
                   btnType="button"
-                  containerStyles={`${pathname !== "/login"
+                  containerStyles={`${
+                    pathname !== "/login"
                       ? pathname === "/"
                         ? "text-black-100 font-medium py-3 mr-2 rounded-full bg-white bg-opacity-70 hover:bg-opacity-80 min-w-[130px]"
                         : "text-white font-medium py-3 mr-2 rounded-full bg-primary-blue bg-opacity-70 hover:bg-opacity-80 min-w-[130px]"
                       : "text-white font-medium py-3 mr-2 rounded-full bg-primary-blue bg-opacity-80 min-w-[130px]"
-                    }`}
+                  }`}
                 />
               </Link>
               <Link href="/register">
                 <CustomButtom
                   title="Sing Up"
                   btnType="button"
-                  containerStyles={`${pathname !== "/register"
+                  containerStyles={`${
+                    pathname !== "/register"
                       ? pathname === "/"
                         ? "text-black-100 font-medium py-3 mr-2 rounded-full bg-white bg-opacity-70 hover:bg-opacity-80 min-w-[130px]"
                         : "text-white font-medium py-3 mr-2 rounded-full bg-primary-blue bg-opacity-70 hover:bg-opacity-80 min-w-[130px]"
                       : "text-white font-medium py-3 mr-2 rounded-full bg-primary-blue bg-opacity-80 min-w-[130px]"
-                    }`}
+                  }`}
                 />
               </Link>
             </>
@@ -91,8 +84,9 @@ const Navbar = ({ userId = ""}) => {
             className="relative pl-4 cursor-pointer"
           >
             <CgShoppingBag
-              className={`${pathname === "/" ? "text-[26px] text-gray-200" : "text-[26px]"
-                }`}
+              className={`${
+                pathname === "/" ? "text-[26px] text-gray-200" : "text-[26px]"
+              }`}
             />
             <div className="bg-red-600 w-[18px] h-[18px] absolute -right-1 -bottom-1 rounded-full text-white flex items-center justify-center text-sm font-medium">
               {cartCount}
@@ -106,7 +100,5 @@ const Navbar = ({ userId = ""}) => {
     </header>
   );
 };
-
-
 
 export default Navbar;

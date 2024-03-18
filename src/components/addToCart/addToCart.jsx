@@ -41,6 +41,33 @@ const AddToCart = ({
       progress: undefined,
       theme: "light",
     });
+  const handlePostRequests = async () => {
+    const url = "http://localhost:3000/api/cartDetails";
+
+    const data = {
+      price_id: carObject.price_id,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+      console.log("Success:", responseData);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div>
       <button
@@ -49,6 +76,7 @@ const AddToCart = ({
         onClick={() => {
           addItem(carObject);
           notify();
+          handlePostRequests();
         }}
       >
         <span className={`flex-1 ${textStyles}`}>{title}</span>

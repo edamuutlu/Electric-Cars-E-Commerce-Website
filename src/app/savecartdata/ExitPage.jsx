@@ -1,25 +1,17 @@
 "use client";
 import { signOut } from "next-auth/react";
-import ProductList from './productList';
+import { useShoppingCart } from "use-shopping-cart";
 
 const ExitPage = () => {
-  
+  const { clearCart } = useShoppingCart();
+  const handleLogout = () => {
+    signOut({
+      callbackUrl: "/login", // Yönlendirme yapılacak sayfanın URL'si
+    });
+  };
+  clearCart();
+  handleLogout();
+  return <div></div>;
+};
 
-    const productIds = ProductList();
-    console.log(productIds); // productIds dizisi burada kullanılabilir
-     
-
-
-    /* const handleLogout = () => {
-        signOut({
-          callbackUrl: '/login', // Yönlendirme yapılacak sayfanın URL'si
-        });
-      };
-      console.log("çıktım");
-      handleLogout(); */
-    return ( 
-      <div>{productIds}</div>
-     );
-}
- 
 export default ExitPage;

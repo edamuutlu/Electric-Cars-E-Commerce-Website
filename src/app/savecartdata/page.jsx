@@ -1,33 +1,41 @@
 import { saveData } from "@/constans/saveCartData";
 import { findUserId } from "@/constans/findUserId";
 import ExitPage from "./ExitPage";
-import axios from "axios";
 
 const SaveCartData = async () => {
-  const userId = await findUserId();
-  console.log("userID: ", userId);
-  const fetchCartDetails = async () => {
-    try {
-      const response = await axios.get("/savecartdata/productList");
-      console.log(response.data.cartDetails);
-      /* setCartDetails(response.data.cartDetails); */
-    } catch (error) {
-      console.error("Error fetching cart details:", error);
-    }
-  };
-  fetchCartDetails();
-  /*     console.log("Product IDs1:", productIds);
-   */
-  //const products = ProductList();
-  //console.log("urunler: ", products);
+  try {
+    let productIds = [];
+    const userId = await findUserId();
+    console.log("userID: ", userId);
 
-  /* const saveShpData = await saveData({ userId, productIds }); */
-  return (
-    <div>
-      data...
-      {/* <ExitPage /> */}
-    </div>
-  );
+    const response = await fetch("http://localhost:3000/api/cartDetails");
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+
+    // Gelen veri dizisindeki her bir öğe için price_id'yi yazdır
+    data.forEach((item) => {
+      productIds.push(item.price_id);
+      console.log("price_id:", item.price_id);
+    });
+
+    const saveShpData = await saveData({ userId, productIds });
+
+    return (
+      <div>
+        {data.map((item, index) => (
+          <div key={index}>price_id: {item.price_id}</div>
+        ))}
+        <ExitPage />
+      </div>
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    // Hata durumunda uygun bir işlem yapılabilir
+  }
 };
 
 export default SaveCartData;
