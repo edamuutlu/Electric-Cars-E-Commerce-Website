@@ -16,10 +16,9 @@ export default async function Home() {
 
   if (userId !== null) {
     cartCars = cars.filter((car: any) =>
-      products.some((item) => car.price_id === item)
+      products.some((item: any) => car.price_id === item)
     );
   }
-
   return (
     <div className="overflow-hidden">
       <NavigateSideMenu />

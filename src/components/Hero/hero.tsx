@@ -7,18 +7,12 @@ import { useEffect, useState } from "react";
 
 const Hero = ({ products = [], userId = "" }) => {
   const { addItem, clearCart } = useShoppingCart();
-
   const [initialized, setInitialized] = useState(false);
 
-  useEffect(() => {
-    if (userId !== null) {
-      if (!initialized && products.length > 0) {
-        
-        products.forEach((item) => addItem(item));
-        setInitialized(true);
-      }
-    }
-  }, [products, addItem, clearCart, initialized, userId]);
+  if (userId !== null && products.length > 0 && !initialized) {
+    products.forEach((item) => addItem(item));
+    setInitialized(true);
+  }
 
   const handleScroll = () => {};
   return (
