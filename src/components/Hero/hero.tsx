@@ -2,8 +2,24 @@
 import styles from "./hero.module.css";
 import CustomButtom from "../custombuttom/custombuttom";
 import Image from "next/image";
+import { useShoppingCart } from "use-shopping-cart";
+import { useEffect, useState } from "react";
 
-const Hero = () => {
+const Hero = ({ products = [], userId = "" }) => {
+  const { addItem, clearCart } = useShoppingCart();
+
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (userId !== null) {
+      if (!initialized && products.length > 0) {
+        
+        products.forEach((item) => addItem(item));
+        setInitialized(true);
+      }
+    }
+  }, [products, addItem, clearCart, initialized, userId]);
+
   const handleScroll = () => {};
   return (
     <div className={styles.hero}>

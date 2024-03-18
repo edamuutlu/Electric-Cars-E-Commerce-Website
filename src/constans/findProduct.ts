@@ -9,7 +9,7 @@ export const findProduct = async () => {
       try {
         const product = await ShoppingCart.findOne({ userId: userId });
         if (product) {
-          return product.productId.toString();
+          return product.productId;
         } else {
           console.log("Kullanıcı bulunamadı.");
         }

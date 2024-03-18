@@ -1,18 +1,32 @@
 import ShoppingCart from "@/models/ShoppingCart";
 
-export const saveData = ({ userId = "", productIds = [] }) => {
-  const newShoppingCart = new ShoppingCart({
-    userId: userId,
-    productId: productIds,
-  });
+export const saveData = async ({ userId = "", productIds = [] }) => {
+  try {
+    // Belirli userId'ye ait alışveriş sepeti öğesini bul
+    const existingShoppingCart = await ShoppingCart.findOne({ userId: userId });
 
-  // Alışveriş sepeti öğesini kaydedin
-  newShoppingCart
-    .save()
-    .then((savedItem) => {
-      console.log("Alışveriş sepeti öğesi başarıyla kaydedildi:", savedItem);
-    })
-    .catch((error) => {
-      console.error("Alışveriş sepeti öğesi kaydedilirken hata oluştu:", error);
-    });
+    if (existingShoppingCart) {
+      // Eğer varsa güncelle
+      existingShoppingCart.productId = productIds;
+      await existingShoppingCart.save();
+      console.log(
+        "Alışveriş sepeti öğesi başarıyla güncellendi:",
+        existingShoppingCart
+      );
+    } else {
+      // Eğer yoksa yeni kayıt oluştur
+      const newShoppingCart = new ShoppingCart({
+        userId: userId,
+        productId: productIds,
+      });
+
+      await newShoppingCart.save();
+      console.log(
+        "Yeni alışveriş sepeti öğesi başarıyla kaydedildi:",
+        newShoppingCart
+      );
+    }
+  } catch (error) {
+    console.error("Alışveriş sepeti öğesi kaydedilirken hata oluştu:", error);
+  }
 };

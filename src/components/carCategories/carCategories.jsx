@@ -10,7 +10,7 @@ import { yearsOfProduction, colors } from "@/constans";
 import PriceBox from "../PriceBox/priceBox";
 import ShowMore from "../ShowMore/showMore";
 
-const CarCategories = ({ cars, isSessionId }) => {
+const CarCategories = ({ cars }) => {
   const yearList = yearsOfProduction;
   const colorList = colors;
   const [manufacturer, setManufacturer] = useState("ALL");
@@ -97,7 +97,6 @@ const CarCategories = ({ cars, isSessionId }) => {
         filterCarLenght={filterCar.length}
         brand={manufacturer}
         model={carModel}
-        isSessionId={isSessionId}
       />
 
       <ShowMore

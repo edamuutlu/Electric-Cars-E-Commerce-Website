@@ -55,7 +55,7 @@ const CartItem = ({ item, open }) => {
             href={`/product/${item.slug}`}
             onClick={() => (open.shouldDisplayCart = false)}
           >
-            <h5>{item.name}</h5>
+            <h5>{item.name || item.title}</h5>
           </Link>
           {/* <h5>{item.name}</h5> */}
           <button onClick={() => handleRemoveItem(item.id)}>

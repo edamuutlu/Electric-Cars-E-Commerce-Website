@@ -7,17 +7,7 @@ import { urlFor } from "@/app/lib/sanity";
 import CustomButtom from "../custombuttom/custombuttom";
 import AddToCart from "../addToCart/addToCart";
 
-const Car = ({ car, isSessionId }) => {
-  /* if (isSessionId === null) {
-    // Login Girişi Yapılmamış
-    console.log("Giriş yapılmadı.");
-  } else {
-    // Login girişi yapılmış
-    console.log("Giriş yapıldı.");
-    console.log(isSessionId);
-    // Databaseden bu kullanıcının sepet ürünlerini getir
-  } */
-
+const Car = ({ car }) => {
   return (
     <div key={car._id} className={`${styles.car_card} group`}>
       <div className={styles.car_card__content}>
