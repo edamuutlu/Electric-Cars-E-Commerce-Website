@@ -1,4 +1,3 @@
-import { getServerSession } from "next-auth";
 import { findUserId } from "./findUserId";
 import ShoppingCart from "@/models/ShoppingCart";
 

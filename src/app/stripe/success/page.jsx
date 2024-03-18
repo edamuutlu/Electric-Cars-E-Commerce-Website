@@ -1,12 +1,18 @@
 "use client";
-import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import CustomButtom from "@/components/custombuttom/custombuttom";
+import { useState } from "react";
+import { deleteProduct } from "@/constans/deleteProduct";
 
 const SuccessPage = () => {
   const { data: session, status: sessionStatus } = useSession();
-  const { clearCart } = useShoppingCart();
+  const [initialized, setInitialized] = useState(false);
+  if (!initialized) {
+    localStorage.removeItem("persist:root");
+    /* deleteProduct(); */
+    setInitialized(true);
+  }
 
   if (sessionStatus === "loading") {
     return (

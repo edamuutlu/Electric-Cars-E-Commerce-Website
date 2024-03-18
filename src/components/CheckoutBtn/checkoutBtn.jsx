@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 
 const CheckoutBtn = ({ isUserId }) => {
-  const { redirectToCheckout, clearCart } = useShoppingCart();
+  const { redirectToCheckout } = useShoppingCart();
   const [loading, setLoading] = useState(false); // Yükleme durumu için bir state
 
   const handleCheckout = async () => {
@@ -29,9 +29,6 @@ const CheckoutBtn = ({ isUserId }) => {
       <button
         onClick={() => {
           handleCheckout();
-          {
-            isUserId === null ?  "" : clearCart();
-          }
         }}
         className="py-4 text-white uppercase bg-black hover:bg-black-100 
         w-full shadow-lg rounded-md"
