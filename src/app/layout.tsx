@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/navbar";
 import CartProvider from "@/components/CartSidebar/cartProvider";
 import { ToastContainer } from "react-toastify";
 import { findUserId } from "@/constans/findUserId";
+import { findProduct } from "@/constans/findProduct";
 
 export const metadata: Metadata = {
   title: "E-Cars",
@@ -20,18 +21,7 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession();
   const userId = await findUserId();
-  /* const handleButtonClick = () => {
-    saveData()
-      .then(savedItem => {
-        // Başarı durumunda işlem yap
-      })
-      .catch(error => {
-        // Hata durumunda işlem yap
-      });
-  }; */
-
-
-  //const saveShpData = await saveData();
+ 
 
   // if (isUserId === null) {
   //   Login Girişi Yapılmamış
