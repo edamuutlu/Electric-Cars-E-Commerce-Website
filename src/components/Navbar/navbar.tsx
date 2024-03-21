@@ -23,15 +23,11 @@ const Navbar = ({ userId = "" }) => {
   return (
     <header className="w-full fixed z-10">
       <nav className="max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
-        <Link href={"/"} className="flex justify-center items-center">
-          <Image
-            src={"/ecar_logo.png"}
-            alt=""
-            width={115}
-            height={18}
-            className="object-contain"
-          />
-        </Link>
+        <div>
+          <Link href={"/"}>
+            <Image src={"/ecar_logo.png"} alt="logo" width={115} height={25} />
+          </Link>
+        </div>
 
         <div className="flex justify-end items-center">
           {!session ? (

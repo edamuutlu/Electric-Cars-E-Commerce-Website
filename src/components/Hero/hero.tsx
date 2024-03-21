@@ -3,10 +3,10 @@ import styles from "./hero.module.css";
 import CustomButtom from "../custombuttom/custombuttom";
 import Image from "next/image";
 import { useShoppingCart } from "use-shopping-cart";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Hero = ({ products = [], userId = "" }) => {
-  const { addItem, clearCart } = useShoppingCart();
+  const { addItem } = useShoppingCart();
   const [initialized, setInitialized] = useState(false);
 
   if (userId !== null && products.length > 0 && !initialized) {
@@ -36,7 +36,13 @@ const Hero = ({ products = [], userId = "" }) => {
 
       <div className={styles.hero__image_container}>
         <div className={styles.hero__image}>
-          <Image src={"/audi.png"} alt="" fill className="object-contain" />
+          <Image
+            src={"/audi.png"}
+            alt=""
+            fill
+            className="object-contain"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
+          />
         </div>
 
         <div className={styles.hero__image_overlay}></div>

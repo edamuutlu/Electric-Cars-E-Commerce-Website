@@ -27,6 +27,7 @@ const Car = ({ car }) => {
           fill
           priority
           className="object-contain"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
         />
       </div>
 
@@ -39,12 +40,14 @@ const Car = ({ car }) => {
               height={20}
               alt="streering wheel"
             />
-            <p className="text-[14px]">{car.car_type}</p>
+            <p className="text-[14px] text-slate-800 font-medium">
+              {car.car_type}
+            </p>
           </div>
 
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src={"/tire.svg"} width={20} height={20} alt="Tire icon" />
-            <p className="text-[14px]">{car.tire}</p>
+            <p className="text-[14px] text-slate-800 font-medium">{car.tire}</p>
           </div>
 
           <div className="flex flex-col justify-center items-center gap-2">
@@ -54,7 +57,9 @@ const Car = ({ car }) => {
               height={20}
               alt="Gas icon"
             />
-            <p className="text-[14px]">{car.range}</p>
+            <p className="text-[14px] text-slate-800 font-medium">
+              {car.range}
+            </p>
           </div>
         </div>
 
