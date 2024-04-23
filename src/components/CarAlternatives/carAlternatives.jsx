@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 
 const CarAlternatives = ({ cars, carBrand, carModel, chassisType }) => {
   const [filterCar, setFilterCars] = useState([]);
+  const [limit, setLimit] = useState(8);
+  const [carLenght, setCarLenght] = useState(0);
 
   useEffect(() => {
     const filtered = cars
@@ -18,7 +20,7 @@ const CarAlternatives = ({ cars, carBrand, carModel, chassisType }) => {
           (cri) => cri.name.toLowerCase() !== carBrand.toLowerCase()
         );
         const modelMatch = car.model.toLowerCase() === carModel.toLowerCase();
-        return !categoryMatch || !modelMatch;
+        return !categoryMatch || !modelMatch; // Marka eşleşmeli ama model eşleşmese de getir.
       })
       .sort((a, b) => {
         const categoryMatchA = a.categories.some(
@@ -43,8 +45,10 @@ const CarAlternatives = ({ cars, carBrand, carModel, chassisType }) => {
 
         return a.model.localeCompare(b.model);
       });
+    setCarLenght(filtered.length); // toplam araba sayısı
 
-    setFilterCars(filtered);
+    const firstEightCars = filtered.slice(0, limit);
+    setFilterCars(firstEightCars);
   }, [carBrand, carModel]);
 
   return (

@@ -19,12 +19,7 @@ const AddToCart = ({
   slug,
 }) => {
   const { data: session, status: sessionStatus } = useSession();
-  if (sessionStatus === "authenticated") {
-    var userEmail = session.user?.email;
-    var username = userEmail?.substring(0, userEmail.indexOf("@"));
-  } else {
-    var username = "guest";
-  }
+  const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
 
   const carObject = {
     name: name,

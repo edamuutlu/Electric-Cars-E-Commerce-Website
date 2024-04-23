@@ -5,13 +5,11 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import styles from "@/app/api/auth.module.css";
-import { SignIn } from "@clerk/nextjs";
 import Image from "next/image";
 
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
-  // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -70,7 +68,7 @@ const Login = () => {
           }}
         >
           <img
-            src="ecar_logo.png"
+            src="/ecar_logo.png"
             style={{
               maxWidth: "100%",
               maxHeight: "100%",

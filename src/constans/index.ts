@@ -134,7 +134,7 @@ const fetchModels = async () => {
 fetchModels();
 export { carModels };
 
-// ALL Year Color
+// ALL Year and Color
 let yearsOfProduction: string[] = [];
 let colors: string[] = ["ALL"];
 const fetchYearColor = async () => {

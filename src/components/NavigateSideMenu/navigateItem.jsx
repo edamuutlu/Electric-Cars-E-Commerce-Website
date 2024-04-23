@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 
 const NavigateItem = ({
   text,
@@ -9,7 +9,6 @@ const NavigateItem = ({
   setActiveMenu,
   scroll,
 }) => {
-  const listItemRef = useRef(null);
 
   const handleMenuClick = () => {
     setActiveMenu(title === activeMenu ? null : title);

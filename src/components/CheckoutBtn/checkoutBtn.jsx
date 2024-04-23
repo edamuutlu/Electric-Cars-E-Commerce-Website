@@ -14,7 +14,7 @@ const CheckoutBtn = ({ items, username }) => {
 
   const checkoutOptions = {
     lineItems: items.map(item => ({
-      price: item.price_id, // Örnek olarak price_id kullanıyorum, uygun bir alanı kullanmalısınız
+      price: item.price_id,
       quantity: item.quantity
     })),
     mode: "payment",

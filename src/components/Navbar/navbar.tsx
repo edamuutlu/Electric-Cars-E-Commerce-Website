@@ -20,12 +20,7 @@ const Navbar = ({
   cartDetails,
 }: any) => {
   const { data: session, status: sessionStatus }: any = useSession();
-  if (sessionStatus === "authenticated") {
-    var userEmail = session.user?.email;
-    var username = userEmail?.substring(0, userEmail.indexOf("@"));
-  } else {
-    username = "guest";
-  }
+  const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
 
   const { handleCartClick } = useShoppingCart();
   const cartCountValue = cartCount(username);

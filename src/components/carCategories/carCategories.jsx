@@ -9,7 +9,6 @@ import { Slider } from "@/components/ui/slider";
 import { yearsOfProduction, colors } from "@/constans";
 import PriceBox from "../PriceBox/priceBox";
 import ShowMore from "../ShowMore/showMore";
-import CustomButtom from "../custombuttom/custombuttom";
 
 const CarCategories = ({ cars, addItem }) => {
   const yearList = yearsOfProduction;
@@ -45,8 +44,8 @@ const CarCategories = ({ cars, addItem }) => {
     });
     setCarLenght(filtered.length); // toplam araba sayısı
 
-    const firstTenCars = filtered.slice(0, limit);
-    setFilterCars(firstTenCars);
+    const firstEightCars = filtered.slice(0, limit);
+    setFilterCars(firstEightCars);
   }, [manufacturer, carModel, year, color, price, cars, limit, carLenght]);
 
   return (

@@ -17,7 +17,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import ProductCarVitrin from "./../../../components/ProductCarVitrin/productCarVitrin";
 import CarInfoTable from "./../../../components/CarInfoTable/carInfoTable";
-import CarTechnicalDetils from "./../../../components/CarTechnicalDetils/carTechnicalDetils";
+import CarTechnicalDetails from "../../../components/CarTechnicalDetails/carTechnicalDetails";
 import CarAlternatives from "./../../../components/CarAlternatives/carAlternatives";
 import { usePathname } from "next/navigation";
 
@@ -153,7 +153,7 @@ const ProductDetails = ({ addItem }) => {
           <h4 className="text-center my-2">
             {car.title} technical specifications
           </h4>
-          <CarTechnicalDetils car={car} />
+          <CarTechnicalDetails car={car} />
         </div>
 
         {/* Car Slider */}

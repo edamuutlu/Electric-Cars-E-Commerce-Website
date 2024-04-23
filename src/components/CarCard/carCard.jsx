@@ -16,11 +16,8 @@ const CarCard = ({ cars, filterCarLenght, brand, model, addItem }) => {
             found
             <span className="text-red-600 font-semibold">
               {" "}
-              {filterCarLenght > 1
-                ? `${filterCarLenght}`
-                : filterCarLenght === 0
-                  ? `${filterCarLenght}`
-                  : `${filterCarLenght}`}{" "}
+              {filterCarLenght}
+              {" "}
             </span>
             sales.
           </span>
