@@ -2,18 +2,8 @@
 import styles from "./hero.module.css";
 import CustomButtom from "../custombuttom/custombuttom";
 import Image from "next/image";
-import { useShoppingCart } from "use-shopping-cart";
-import { useState } from "react";
 
-const Hero = ({ products = [], userId = "" }) => {
-  const { addItem } = useShoppingCart();
-  const [initialized, setInitialized] = useState(false);
-
-  if (userId !== null && products.length > 0 && !initialized) {
-    products.forEach((item) => addItem(item));
-    setInitialized(true);
-  }
-
+const Hero = () => {
   const handleScroll = () => {};
   return (
     <div className={styles.hero}>

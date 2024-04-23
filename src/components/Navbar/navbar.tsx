@@ -8,20 +8,31 @@ import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
-const Navbar = ({ userId = "" }) => {
+const Navbar = ({
+  cartCount,
+  removeItem,
+  clearCart,
+  incrementItem,
+  decrementItem,
+  totalPrice,
+  cartDetails,
+}: any) => {
   const { data: session, status: sessionStatus }: any = useSession();
-  const { cartCount, handleCartClick, cartDetails } = useShoppingCart();
+  if (sessionStatus === "authenticated") {
+    var userEmail = session.user?.email;
+    var username = userEmail?.substring(0, userEmail.indexOf("@"));
+  } else {
+    username = "guest";
+  }
 
+  const { handleCartClick } = useShoppingCart();
+  const cartCountValue = cartCount(username);
   const pathname = usePathname();
-  const router = useRouter();
-
-  const handleLogout = () => {
-    router.push("/savecartdata");
-  };
 
   return (
-    <header className="w-full fixed z-10">
+    <header className="w-full fixed z-50">
       <nav className="max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
         <div>
           <Link href={"/"}>
@@ -70,7 +81,7 @@ const Navbar = ({ userId = "" }) => {
                 title="Logout"
                 btnType="button"
                 containerStyles="text-white py-3 rounded-full bg-primary-blue min-w-[130px]"
-                handleClick={handleLogout}
+                handleClick={() => signOut()}
               />
             </>
           )}
@@ -85,12 +96,20 @@ const Navbar = ({ userId = "" }) => {
               }`}
             />
             <div className="bg-red-600 w-[18px] h-[18px] absolute -right-1 -bottom-1 rounded-full text-white flex items-center justify-center text-sm font-medium">
-              {cartCount}
+              {cartCountValue}
             </div>
           </div>
 
           {/* cardSidebar */}
-          <CartSidebar isUserId={userId} />
+          <CartSidebar
+            cartCount={cartCount}
+            removeItem={removeItem}
+            clearCart={clearCart}
+            incrementItem={incrementItem}
+            decrementItem={decrementItem}
+            totalPrice={totalPrice}
+            cartDetails={cartDetails}
+          />
         </div>
       </nav>
     </header>

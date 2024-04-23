@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FaGoogle, FaGithub } from 'react-icons/fa';
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import styles from "@/app/api/auth.module.css";
 import { SignIn } from "@clerk/nextjs";
 import Image from "next/image";
@@ -16,6 +16,9 @@ const Login = () => {
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
+      var userEmail = session.user?.email;
+      var username = userEmail?.substring(0, userEmail.indexOf("@"));
+      localStorage.setItem(username + "_cartDetails", JSON.stringify({}));
       router.replace("/");
     }
   }, [sessionStatus, router]);
@@ -57,12 +60,20 @@ const Login = () => {
   if (sessionStatus === "loading") {
     return (
       <div className="loader">
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
           <img
             src="ecar_logo.png"
             style={{
-              maxWidth: '100%',
-              maxHeight: '100%',
+              maxWidth: "100%",
+              maxHeight: "100%",
             }}
           />
         </div>
@@ -84,7 +95,8 @@ const Login = () => {
             <div className="hidden lg:relative lg:block lg:p-12">
               <a className="block text-white" href="/">
                 <span className="sr-only">Home</span>
-                <Image className="bg-white rounded-full "
+                <Image
+                  className="bg-white rounded-full "
                   src={"/icon-2.png"}
                   alt=" "
                   width={70}
@@ -97,14 +109,13 @@ const Login = () => {
               </h2>
 
               <p className="mt-4 leading-relaxed text-white/90">
-                Streamline your car rental experience with our effortless booking process.
+                Streamline your car rental experience with our effortless
+                booking process.
               </p>
             </div>
           </section>
 
-          <main
-            className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
-          >
+          <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
             <div className="max-w-xl lg:max-w-3xl">
               <div className="relative -mt-16 block lg:hidden">
                 <a
@@ -112,12 +123,13 @@ const Login = () => {
                   href="/"
                 >
                   <span className="sr-only">Home</span>
-                  <Image className="bg-white rounded-full "
-                  src={"/icon-2.png"}
-                  alt=" "
-                  width={70}
-                  height={70}
-                />
+                  <Image
+                    className="bg-white rounded-full "
+                    src={"/icon-2.png"}
+                    alt=" "
+                    width={70}
+                    height={70}
+                  />
                 </a>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
@@ -125,15 +137,17 @@ const Login = () => {
                 </h1>
 
                 <p className="mt-4 leading-relaxed text-gray-500">
-                  Streamline your car rental experience with our effortless booking process.
+                  Streamline your car rental experience with our effortless
+                  booking process.
                 </p>
               </div>
 
               <div className={styles.auth_container}>
-
-                <div className='flex justify-center'>
+                <div className="flex justify-center">
                   <div className={styles.auth_formDiv}>
-                    <h2 className='text-black text-5xl mb-8 font-semibold'>Login</h2>
+                    <h2 className="text-black text-5xl mb-8 font-semibold">
+                      Login
+                    </h2>
                     <form onSubmit={handleSubmit}>
                       <input
                         type="text"
@@ -147,17 +161,16 @@ const Login = () => {
                         placeholder="Password"
                         required
                       />
-                      <button
-                        type="submit"
-                        className={styles.auth_submit}
-                      >
+                      <button type="submit" className={styles.auth_submit}>
                         {" "}
                         Sign In
                       </button>
-                      <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
+                      <p className="text-red-600 text-[16px] mb-4">
+                        {error && error}
+                      </p>
                     </form>
 
-                    <div className='flex flex-row items-center gap-4 mt-10 justify-center'>
+                    <div className="flex flex-row items-center gap-4 mt-10 justify-center">
                       <button
                         className="bg-white flex text-black w-12 h-12 rounded-full items-center text-center cursor-pointer justify-center"
                         onClick={() => {
@@ -173,18 +186,21 @@ const Login = () => {
                           signIn("google");
                         }}
                       >
-                        <FaGoogle size={30} style={{ color: "#4285F4" }}></FaGoogle>
+                        <FaGoogle
+                          size={30}
+                          style={{ color: "#4285F4" }}
+                        ></FaGoogle>
                       </button>
-
                     </div>
 
-                    <div className='text-left'>
-                      <p className='text-neutral-600 mt-12'>
+                    <div className="text-left">
+                      <p className="text-neutral-600 mt-12">
                         Don't have an account?
                         <Link
-                          className='text-black ml-2 cursor-pointer hover:underline transition'
+                          className="text-black ml-2 cursor-pointer hover:underline transition"
                           href="/register"
-                        >Create an account
+                        >
+                          Create an account
                         </Link>
                       </p>
                     </div>

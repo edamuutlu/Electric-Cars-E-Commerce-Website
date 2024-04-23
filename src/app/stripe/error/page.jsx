@@ -1,5 +1,53 @@
+"use client";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { BsBagXFill } from "react-icons/bs";
+import CustomButtom from "@/components/custombuttom/custombuttom";
+
 function ErrorPage() {
-  return <div>Error Page</div>;
+  const { data: session, status: sessionStatus } = useSession();
+
+  if (sessionStatus === "loading") {
+    return (
+      <div className="loader">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <img
+            src="/ecar_logo.png"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <section className="bg-slate-100 flex justify-center items-center h-screen">
+      <div className="bg-white shadow-md py-7 px-10 w-96 h-72 rounded-md flex flex-col gap-3 items-center ">
+        <span><BsBagXFill className="text-red-600 text-5xl" /></span>
+        <div className="text-center pt-7">
+          <h4 className="mb-1">Payment Failed</h4>
+          <span className="text-[14px] text-gray-400">Please try again!</span>
+        </div>
+        <Link href={"/"}>
+          <CustomButtom
+            title="Try Again"
+            containerStyles="btn bg-red-600 rounded-lg mt-4"
+            textStyles="text-white text-[14px] leading-[17px] font-bold"
+          />
+        </Link>
+      </div>
+    </section>
+  );
 }
 
 export default ErrorPage;

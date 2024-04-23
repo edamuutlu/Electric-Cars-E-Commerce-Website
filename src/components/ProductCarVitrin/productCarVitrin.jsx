@@ -1,6 +1,6 @@
 import AddToCart from "../addToCart/addToCart";
 
-const ProductCarVitrin = ({car}) => {
+const ProductCarVitrin = ({ car, addItem }) => {
   return (
     <div className="flex flex-col  gap-6 items-start">
       <div>
@@ -12,7 +12,7 @@ const ProductCarVitrin = ({car}) => {
       <p className="text-black-100 px-3 font-medium">{car.description}</p>
       {/* botton */}
       <AddToCart
-        /* id={car._id} */
+        addItem={addItem}
         price_id={car.price_id}
         name={car.title}
         currency="TL"

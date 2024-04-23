@@ -2,11 +2,9 @@ import { getServerSession } from "next-auth";
 import SessionProvider from "@/utils/SessionProvider";
 import type { Metadata } from "next";
 import "./globals.css";
-import Footer from "@/components/Footer/footer";
-import Navbar from "@/components/Navbar/navbar";
 import CartProvider from "@/components/CartSidebar/cartProvider";
-import { ToastContainer } from "react-toastify";
-import { findUserId } from "@/constans/findUserId";
+import { ShoppingCartWrapper } from "@/constans/shoppingCartWrapper";
+import { allData } from "@/constans";
 
 export const metadata: Metadata = {
   title: "E-Cars",
@@ -19,17 +17,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
-  const userId = await findUserId();
+  const cars = await allData();
 
   return (
     <html lang="en">
       <body>
         <SessionProvider session={session}>
           <CartProvider>
-            <Navbar userId={userId} />
-            {children}
-            <ToastContainer stacked />
-            <Footer />
+            <ShoppingCartWrapper cars={cars}>{children}</ShoppingCartWrapper>
           </CartProvider>
         </SessionProvider>
       </body>

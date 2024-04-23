@@ -9,8 +9,9 @@ import { Slider } from "@/components/ui/slider";
 import { yearsOfProduction, colors } from "@/constans";
 import PriceBox from "../PriceBox/priceBox";
 import ShowMore from "../ShowMore/showMore";
+import CustomButtom from "../custombuttom/custombuttom";
 
-const CarCategories = ({ cars }) => {
+const CarCategories = ({ cars, addItem }) => {
   const yearList = yearsOfProduction;
   const colorList = colors;
   const [manufacturer, setManufacturer] = useState("ALL");
@@ -97,6 +98,7 @@ const CarCategories = ({ cars }) => {
         filterCarLenght={filterCar.length}
         brand={manufacturer}
         model={carModel}
+        addItem={addItem}
       />
 
       <ShowMore
@@ -105,6 +107,7 @@ const CarCategories = ({ cars }) => {
         onChange={setLimit}
         maxLimit={carLenght}
       />
+
     </>
   );
 };

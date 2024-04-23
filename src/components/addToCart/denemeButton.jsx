@@ -1,10 +1,9 @@
 "use client";
 import Image from "next/image";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 
-const AddToCart = ({
+const DenemeButton = ({
   addItem,
   title,
   containerStyles,
@@ -37,18 +36,6 @@ const AddToCart = ({
     quantity: 1,
   };
 
-  const notify = () =>
-    toast.success(`${carObject.name} has been added to the cart`, {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
   return (
     <div>
       <button
@@ -56,7 +43,6 @@ const AddToCart = ({
         className={`custom-btn ${containerStyles}`}
         onClick={() => {
           addItem(carObject, username);
-          notify();
         }}
       >
         <span className={`flex-1 ${textStyles}`}>{title}</span>
@@ -76,4 +62,4 @@ const AddToCart = ({
   );
 };
 
-export default AddToCart;
+export default DenemeButton;

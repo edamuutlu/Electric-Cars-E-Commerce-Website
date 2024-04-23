@@ -7,7 +7,7 @@ import { urlFor } from "@/app/lib/sanity";
 import CustomButtom from "../custombuttom/custombuttom";
 import AddToCart from "../addToCart/addToCart";
 
-const Car = ({ car }) => {
+const Car = ({ car, addItem }) => {
   return (
     <div key={car._id} className={`${styles.car_card} group`}>
       <div className={styles.car_card__content}>
@@ -74,7 +74,7 @@ const Car = ({ car }) => {
           </Link>
 
           <AddToCart
-            /* id={car._id} */
+            addItem={addItem}
             price_id={car.price_id}
             name={car.title}
             currency="TL"
@@ -82,11 +82,12 @@ const Car = ({ car }) => {
             images={car.images}
             price={car.price}
             slug={car.slug}
-            title="Add to Card"
+            title="Add to Cart"
             containerStyles="w-50 py-[16px rounded-full bg-red-500"
             textStyles="text-white text-[14px] leading-[17px] font-bold mr-3"
             rightIcon="/add-to-basket.png"
           />
+
         </div>
       </div>
     </div>

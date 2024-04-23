@@ -3,16 +3,27 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import CustomButtom from "@/components/custombuttom/custombuttom";
 import { useEffect, useState } from "react";
+import { IoBagCheck } from "react-icons/io5";
+
 
 const SuccessPage = () => {
-  const { status: sessionStatus } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
   const [initialized, setInitialized] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       if (sessionStatus === "authenticated") {
+        var userEmail = session.user?.email;
+        var username = userEmail?.substring(0, userEmail.indexOf("@"));
         if (!initialized) {
-          console.log(sessionStatus);
-          localStorage.removeItem("phersist:root");
+          var cartDataObject = localStorage.getItem(username + "_cart");
+          var cartDataObject = {
+            cartCount: 0,
+            cartDetails: {},
+            totalPrice: 0,
+          };
+          localStorage.setItem(username + "_cart", JSON.stringify(cartDataObject));
+
           setInitialized(true);
         }
       }
@@ -46,14 +57,18 @@ const SuccessPage = () => {
   }
 
   return (
-    <section className="py-72">
-      <div className="container mx-auto">
-        <h3>Your payment was successful! Thank you!</h3>
+    <section className="bg-slate-100 flex justify-center items-center h-screen">
+      <div className="bg-white shadow-md py-7 px-10 w-96 h-72 rounded-md flex flex-col gap-3 items-center ">
+        <span><IoBagCheck className="text-green-600 text-5xl" /></span>
+        <div className="text-center pt-7">
+          <h4 className="mb-1">Payment Successful</h4>
+          <span className="text-[14px] text-gray-400">Thank you for your payment!</span>
+        </div>
         <Link href={"/"}>
           <CustomButtom
-            title="Back to the homepage"
-            containerStyles="btn bg-primary-blue"
-            textStyles="text-white text-[14px] uppercase leading-[17px] font-bold mr-3"
+            title="Countinue Shopping"
+            containerStyles="btn bg-green-600 rounded-lg mt-4"
+            textStyles="text-white text-[14px] leading-[17px] font-bold"
           />
         </Link>
       </div>

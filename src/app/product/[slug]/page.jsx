@@ -19,22 +19,26 @@ import ProductCarVitrin from "./../../../components/ProductCarVitrin/productCarV
 import CarInfoTable from "./../../../components/CarInfoTable/carInfoTable";
 import CarTechnicalDetils from "./../../../components/CarTechnicalDetils/carTechnicalDetils";
 import CarAlternatives from "./../../../components/CarAlternatives/carAlternatives";
+import { usePathname } from "next/navigation";
 
-const ProductDetails = ({ params }) => {
+const ProductDetails = ({ addItem }) => {
+  const pathname = usePathname();
+  const slug = pathname.split("/").pop();
+
   const [car, setCar] = useState(null);
   const [cars, setCars] = useState(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
     const fetchCarData = async () => {
-      const carData = await getCarData(params.slug);
+      const carData = await getCarData(slug);
       const allCars = await allData();
       setCar(carData);
       setCars(allCars);
     };
 
     fetchCarData();
-  }, [params.slug]);
+  }, [slug]);
 
   if (!car) {
     return (
@@ -137,7 +141,7 @@ const ProductDetails = ({ params }) => {
               Back to Home
             </Link>
             {/* Car title, price, description, addToCart */}
-            <ProductCarVitrin car={car} />
+            <ProductCarVitrin car={car} addItem={addItem} />
             {/* Car info */}
             <div className="flex flex-col w-full gap-1">
               <CarInfoTable car={car} />
