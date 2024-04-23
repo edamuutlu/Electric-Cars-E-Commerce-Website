@@ -126,8 +126,9 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
   };
 
   const cartCount = (username) => {
-    if (typeof window !== "undefined") {
-      var storedCartData = localStorage.getItem(username + "_cart");
+    var storedCartData = localStorage.getItem(username + "_cart");
+    console.log(storedCartData);
+    if (storedCartData !== null) {
       storedCartData = JSON.parse(storedCartData);
       return storedCartData.cartCount || 0;
     }
@@ -135,8 +136,8 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
   };
 
   const totalPrice = (username) => {
-    if (typeof window !== "undefined") {
-      var storedCartData = localStorage.getItem(username + "_cart");
+    var storedCartData = localStorage.getItem(username + "_cart");
+    if (storedCartData !== null) {
       storedCartData = JSON.parse(storedCartData);
       return storedCartData.totalPrice || 0;
     }
@@ -145,8 +146,11 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
 
   const cartDetails = (username) => {
     var storedCartData = localStorage.getItem(username + "_cart");
-    storedCartData = JSON.parse(storedCartData);
-    return storedCartData.cartDetails || {};
+    if (storedCartData !== null) {
+      storedCartData = JSON.parse(storedCartData);
+      return storedCartData.cartDetails || {};
+    }
+    return {};
   };
 
   const transferItems = (username) => {
