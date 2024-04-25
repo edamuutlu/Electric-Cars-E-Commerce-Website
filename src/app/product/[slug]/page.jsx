@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { FaChevronLeft } from "react-icons/fa6";
+
 import { urlFor } from "@/app/lib/sanity";
 import "react-toastify/dist/ReactToastify.css";
 import { allData, getCarData } from "@/constans";
@@ -137,7 +138,7 @@ const ProductDetails = ({ addItem }) => {
               href={"/"}
               className="flex items-center text-black-100 gap-2 font-semibold hover:text-red-500"
             >
-              <ChevronLeft size={20} />
+              <FaChevronLeft size={20} />
               Back to Home
             </Link>
             {/* Car title, price, description, addToCart */}
