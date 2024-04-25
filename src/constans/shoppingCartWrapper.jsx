@@ -10,7 +10,11 @@ import { usePathname } from "next/navigation";
 import ProductDetails from "@/app/product/[slug]/page";
 
 export const ShoppingCartWrapper = ({ children, cars }) => {
-  const [carts, setCarts] = useState({});
+  const [carts, setCarts] = useState({
+    cartCount: 0,
+    cartDetails: {},
+    totalPrice: 0,
+  });
   const [initialized, setInitialized] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
   const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
@@ -126,20 +130,26 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
   };
 
   const cartCount = (username) => {
-    var storedCartData = localStorage.getItem(username + "_cart");
-    console.log(storedCartData);
-    if (storedCartData !== null) {
-      storedCartData = JSON.parse(storedCartData);
-      return storedCartData.cartCount || 0;
+    try {
+      var storedCartData = localStorage.getItem(username + "_cart");
+      if (storedCartData !== null) {
+        storedCartData = JSON.parse(storedCartData);
+        return storedCartData.cartCount;
+      }
+    } catch (error) {
+
     }
     return 0;
-  };
+  }
 
   const totalPrice = (username) => {
-    var storedCartData = localStorage.getItem(username + "_cart");
-    if (storedCartData !== null) {
-      storedCartData = JSON.parse(storedCartData);
-      return storedCartData.totalPrice || 0;
+    try {
+      var storedCartData = localStorage.getItem(username + "_cart");
+      if (storedCartData !== null) {
+        storedCartData = JSON.parse(storedCartData);
+        return storedCartData.totalPrice;
+      }
+    } catch (error) {
     }
     return 0;
   };

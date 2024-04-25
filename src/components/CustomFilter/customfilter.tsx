@@ -1,8 +1,15 @@
 import { Listbox, Transition } from "@headlessui/react";
 import styles from "./customfilter.module.css";
-import { CustomFilterProps } from "@/types";
 import { Fragment } from "react";
 import { ChevronsUpDown } from "lucide-react";
+
+export interface CustomFilterProps {
+  yearList?: string[];
+  colors?: string[];
+  title?: string;
+  value?: string;
+  onChange?: (manufacturer: string) => void;
+}
 
 const CustomFilter = ({
   yearList = [],

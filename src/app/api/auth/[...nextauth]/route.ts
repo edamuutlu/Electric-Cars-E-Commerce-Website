@@ -54,6 +54,7 @@ export const authOptions: any = {
         await connect();
         try {
           const existingUser = await User.findOne({ email: user.email });
+          console.log(existingUser);
           if (!existingUser) {
             const newUser = new User({
               email: user.email,

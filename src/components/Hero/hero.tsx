@@ -4,7 +4,9 @@ import CustomButtom from "../custombuttom/custombuttom";
 import Image from "next/image";
 
 const Hero = () => {
-  const handleScroll = () => {};
+  const handleScroll = () => {
+    window.scrollTo({ top: 900, behavior: "smooth" });
+  };
   return (
     <div className={styles.hero}>
       <div className="flex-1 pt-36 padding-x">

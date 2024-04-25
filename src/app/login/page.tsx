@@ -14,9 +14,6 @@ const Login = () => {
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
-      var userEmail = session.user?.email;
-      var username = userEmail?.substring(0, userEmail.indexOf("@"));
-      localStorage.setItem(username + "_cartDetails", JSON.stringify({}));
       router.replace("/");
     }
   }, [sessionStatus, router]);
