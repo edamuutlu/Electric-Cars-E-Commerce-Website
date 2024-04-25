@@ -11,7 +11,7 @@ const PriceBox = ({ title, price, setPrice }) => {
     return formattedPrice;
   };
   return (
-    <div className="mr-2">
+    <div className="mr-2 w-[100%]">
       <span>{title}</span>
       <Input
         type="text"

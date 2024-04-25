@@ -59,7 +59,7 @@ const CarCategories = ({ cars, addItem }) => {
           className="w-full"
         />
         <div className={styles.home__filter_container}>
-          <div className="mr-2 max-w-[220px]">
+          <div className="mr-2 max-w-[300px]">
             <div className="text-[16px] mb-2 font-medium flex">
               <PriceBox title="Min Price:" price={price} setPrice={setPrice} />
               <PriceBox
