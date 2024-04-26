@@ -17,8 +17,11 @@ const Register = () => {
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+    const firstname = e.target[0].value;
+    const lastname = e.target[1].value;
+    const email = e.target[2].value;
+    const password = e.target[3].value;
+    const phone = e.target[4].value;
 
     if (!isValidEmail(email)) {
       setError("Email is invalid");
@@ -37,8 +40,11 @@ const Register = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          firstname,
+          lastname,
           email,
           password,
+          phone,
         }),
       });
       if (res.status === 400) {
@@ -131,48 +137,62 @@ const Register = () => {
               </div>
 
               <div className={styles.auth_container}>
+        <div className="flex justify-center">
+          <div className={styles.auth_formDiv}>
+            <h2 className="text-black text-5xl mb-8 font-semibold">
+              Register
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className={styles.auth_input}
+                placeholder="First Name"
+                required
+              />
+              <input
+                type="text"
+                className={styles.auth_input}
+                placeholder="Last Name"
+                required
+              />
+              <input
+                type="text"
+                className={styles.auth_input}
+                placeholder="Email"
+                required
+              />
+              <input
+                type="password"
+                className={styles.auth_input}
+                placeholder="Password"
+                required
+              />
+              <input
+                type="text"
+                className={styles.auth_input}
+                placeholder="Mobile Number"
+                required
+              />
+              <button type="submit" className={styles.auth_submit}>
+                {" "}
+                Register
+              </button>
+              <p className="text-red-600 text-[16px] mb-4">
+                {error && error}
+              </p>
+            </form>
 
-                <div className='flex justify-center'>
-                  <div className={styles.auth_formDiv}>
-                    <h2 className='text-black text-5xl mb-8 font-semibold'>Register</h2>
-                    <form onSubmit={handleSubmit}>
-                      <input
-                        type="text"
-                        className={styles.auth_input}
-                        placeholder="Email"
-                        required
-                      />
-                      <input
-                        type="password"
-                        className={styles.auth_input}
-                        placeholder="Password"
-                        required
-                      />
-                      <button
-                        type="submit"
-                        className={styles.auth_submit}
-                      >
-                        {" "}
-                        Register
-                      </button>
-                      <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
-                    </form>
-
-                    <div className='text-left'>
-                      <p className='text-neutral-600 mt-12'>
-                        Already have an account
-                        <Link
-                          className={styles.auth_login}
-                          href="/login"
-                        >
-                          Login
-                        </Link>
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+            <div className="text-left">
+              <p className="text-neutral-600 mt-12">
+                Already have an account?{" "}
+                <Link className={styles.auth_login} href="/login">
+                  Login
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
             </div>
           </main>
         </div>

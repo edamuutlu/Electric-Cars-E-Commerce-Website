@@ -26,6 +26,10 @@ const Navbar = ({
   const { handleCartClick } = useShoppingCart();
   const cartCountValue = cartCount(username);
 
+  if (sessionStatus === "authenticated") {
+    console.log(session.user);
+  }
+
   return (
     <header className="w-full fixed z-50 ">
       <nav className="bg-slate-50 bg-opacity-90 shadow-lg max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
