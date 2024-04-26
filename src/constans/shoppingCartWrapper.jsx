@@ -127,7 +127,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
 
   const cartCount = (username) => {
     var storedCartData = localStorage.getItem(username + "_cart");
-    console.log(storedCartData);
+    //console.log(storedCartData);
     if (storedCartData !== null) {
       storedCartData = JSON.parse(storedCartData);
       return storedCartData.cartCount || 0;

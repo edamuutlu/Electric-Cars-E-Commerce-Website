@@ -7,7 +7,6 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 const Navbar = ({
@@ -25,6 +24,10 @@ const Navbar = ({
   const { handleCartClick } = useShoppingCart();
   const cartCountValue = cartCount(username);
   const pathname = usePathname();
+
+  if (sessionStatus === "authenticated") {
+    console.log(session.user);
+  }    
 
   return (
     <header className="w-full fixed z-50">
