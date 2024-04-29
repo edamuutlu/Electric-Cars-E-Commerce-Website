@@ -170,6 +170,8 @@ const CarTechnicalDetils = ({ car }) => {
               " bg-white p-2",
               "ring-white/60 focus:outline-none focus:ring-2"
             )}
+            data-aos="fade-zoom-out"
+            data-duration="1000"
           >
             <table className="min-w-full divide-y divide-gray-200">
               <tbody className="bg-white divide-y divide-gray-200">

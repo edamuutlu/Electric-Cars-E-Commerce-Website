@@ -8,22 +8,24 @@ const CarCard = ({ cars, filterCarLenght, brand, model, addItem }) => {
     <div>
       {cars ? (
         <section>
-          <span className="ml-5 font-normal">
-            Your search for{" "}
-            <span className="font-semibold uppercase">
-              "{brand} {model}"
-            </span>{" "}
-            found
-            <span className="text-red-600 font-semibold">
-              {" "}
-              {filterCarLenght}
-              {" "}
+          <div data-aos="fade-up">
+            <span className="ml-5 font-normal">
+              Your search for{" "}
+              <span className="font-semibold uppercase">
+                "{brand} {model}"
+              </span>{" "}
+              found
+              <span className="text-red-600 font-semibold">
+                {" "}
+                {filterCarLenght}
+                {" "}
+              </span>
+              sales.
             </span>
-            sales.
-          </span>
+          </div>
           <div className={styles.home__cars_wrapper}>
             {cars?.map((car) => (
-              <Car key={car._id} car={car} addItem={addItem}/>
+              <Car key={car._id} car={car} addItem={addItem} />
             ))}
           </div>
         </section>

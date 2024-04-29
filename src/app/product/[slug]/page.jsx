@@ -77,6 +77,7 @@ const ProductDetails = ({ addItem }) => {
       <div className="container mx-auto">
         <div className="flex xl:flex-row lg:flex-row md:flex-col sm:flex-col flex-col gap-14">
           <div
+            data-aos="fade-right"
             className="xl:flex-1 w-full xl:w-[50%] lg:w-[50%] md:w-full sm:w-full flex-col xl:h-[600px] md:h-[440px] sm:h-[540px]
         flex justify-center items-center"
           >
@@ -133,7 +134,7 @@ const ProductDetails = ({ addItem }) => {
             </Swiper>
           </div>
 
-          <div className="flex-1 w-full xl:w-[50%] lg:w-[50%] md:w-full sm:w-full flex px-4 flex-col justify-center items-start gap-10">
+          <div data-aos="fade-left" className="flex-1 w-full xl:w-[50%] lg:w-[50%] md:w-full sm:w-full flex px-4 flex-col justify-center items-start gap-10">
             <Link
               href={"/"}
               className="flex items-center text-black-100 gap-2 font-semibold hover:text-red-500"
@@ -150,7 +151,7 @@ const ProductDetails = ({ addItem }) => {
           </div>
         </div>
         {/* Car Technical Specifications */}
-        <div className="px-8">
+        <div className="px-8" data-aos="fade-up">
           <h4 className="text-center my-2">
             {car.title} technical specifications
           </h4>
@@ -158,7 +159,7 @@ const ProductDetails = ({ addItem }) => {
         </div>
 
         {/* Car Slider */}
-        <div className="px-8">
+        <div className="px-8" data-aos="fade-up">
           <h4 className="text-center my-2">{car.title} alternatives</h4>
           <CarAlternatives
             cars={cars}

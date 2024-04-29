@@ -3,6 +3,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
+import { motion } from "framer-motion";
 
 const AddToCart = ({
   addItem,
@@ -46,7 +47,9 @@ const AddToCart = ({
 
   return (
     <div>
-      <button
+      <motion.button
+        initial={{ opacity: 0.9 }}
+        whileHover={{ scale: 1.1, opacity: 1 }}
         disabled={false}
         className={`custom-btn ${containerStyles}`}
         onClick={() => {
@@ -66,7 +69,7 @@ const AddToCart = ({
             />
           </div>
         )}
-      </button>
+      </motion.button>
     </div>
   );
 };

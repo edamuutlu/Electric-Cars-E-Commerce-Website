@@ -1,7 +1,7 @@
 import { Listbox, Transition } from "@headlessui/react";
 import styles from "./customfilter.module.css";
 import { Fragment } from "react";
-import { ChevronsUpDown } from "lucide-react";
+import { IoIosArrowDown } from "react-icons/io";
 
 export interface CustomFilterProps {
   yearList?: string[];
@@ -19,12 +19,12 @@ const CustomFilter = ({
   onChange = () => {},
 }: CustomFilterProps) => {
   return (
-    <div className="w-fit">
+    <div className="w-fit z-10">
       <Listbox value={value} onChange={onChange}>
         <div className="relative w-fit z-10">
           <Listbox.Button className={styles.custom_filter__btn}>
             {value || title}
-            <ChevronsUpDown
+            <IoIosArrowDown
               width={20}
               height={20}
               className="ml-4 object-contain"

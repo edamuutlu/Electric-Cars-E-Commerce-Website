@@ -16,10 +16,10 @@
 }
 
 .hero__image {
-  @apply relative xl:w-full w-[90%] xl:h-full h-[590px] z-0;
+  @apply relative xl:-right-[5%] xl:w-[70%] max-sm:w-[80%] lg:w-[45%] w-[65%] xl:h-[110%] h-[590px] z-0;
 }
 
 .hero__image_overlay {
-  @apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
+  @apply absolute xl:-top-[-2px] top-[40%] xl:-right-1/2 max-sm:-right-[5%] -right-1/4 bg-hero-bg bg-repeat-round -z-10 xl:w-[80%] w-[60%] xl:h-[70%] h-[50%] overflow-hidden;
 }
 /* END: Hero styles */

@@ -9,7 +9,7 @@ const NavigateSideMenu = () => {
   const [activeMenu, setActiveMenu] = useState(null);
 
   return (
-    <aside className="h-screen fixed top-[30%] z-10">
+    <aside className="h-screen fixed top-[30%] z-50" data-aos="fade-right">
       <nav className="h-[260px] flex flex-col bg-white bg-opacity-10 border shadow-sm">
         <div className="pb-2 border-b flex justify-center items-center group">
           <IoCarSport className="size-10 text-blue-500 p-1.5 hover:bg-blue-50" />

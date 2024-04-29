@@ -3,6 +3,7 @@ import { urlFor } from "@/app/lib/sanity";
 import Image from "next/image";
 import AlternativeTableItem from "./alternativeTableItem";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const AlternativeItem = ({ car }) => {
 
@@ -15,14 +16,18 @@ const AlternativeItem = ({ car }) => {
               <div className="absolute top-8 left-8 bg-primary-blue text-white px-3 text-sm uppercase font-medium">
                 {car.brand}
               </div>
-
-              <Image
-                src={urlFor(car.images[0]).url()}
-                width={340}
-                height={147}
-                alt=""
-                className="object-contain"
-              />
+              <motion.div 
+              initial={{ opacity: 0.9 }}
+              whileHover={{ scale: 1.1, opacity: 1 }} 
+              >
+                <Image
+                  src={urlFor(car.images[0]).url()}
+                  width={340}
+                  height={147}
+                  alt=""
+                  className="object-contain"
+                />
+              </motion.div>
             </div>
             {/* Car Details */}
             <div className="py-3 border-b">

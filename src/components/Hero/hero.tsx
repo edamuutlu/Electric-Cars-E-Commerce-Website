@@ -9,7 +9,7 @@ const Hero = () => {
   };
   return (
     <div className={styles.hero}>
-      <div className="flex-1 pt-36 padding-x">
+      <div data-aos="fade-right" className="flex-1 pt-36 padding-x">
         <h1 className={styles.hero__title}>
           Find, book, or rent a car - quickly and easily!
         </h1>
@@ -27,7 +27,7 @@ const Hero = () => {
       </div>
 
       <div className={styles.hero__image_container}>
-        <div className={styles.hero__image}>
+        <div data-aos="fade-left" className={styles.hero__image}>
           <Image
             src={"/audi.png"}
             alt=""
@@ -37,7 +37,7 @@ const Hero = () => {
           />
         </div>
 
-        <div className={styles.hero__image_overlay}></div>
+        <div data-aos="fade-down" className={styles.hero__image_overlay}></div>
       </div>
     </div>
   );

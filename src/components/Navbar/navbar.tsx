@@ -7,6 +7,7 @@ import CartSidebar from "../CartSidebar/cartSidebar";
 import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { motion } from "framer-motion";
 
 const Navbar = ({
   cartCount,
@@ -24,14 +25,18 @@ const Navbar = ({
       : "guest";
 
   const { handleCartClick } = useShoppingCart();
-  const cartCountValue = cartCount(username);
+  let cartCountValue = 0;
+
+  if (typeof window !== "undefined" && window.localStorage) {
+    cartCountValue = cartCount(username);
+  }
 
   if (sessionStatus === "authenticated") {
-    console.log(session.user);
+    console.log(session);
   }
 
   return (
-    <header className="w-full fixed z-50 ">
+    <header className="w-full fixed z-50 top-[5px]" data-aos="fade-down">
       <nav className="bg-slate-50 bg-opacity-90 shadow-lg max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
         <div className="p-3">
           <Link href={"/"}>
@@ -73,7 +78,8 @@ const Navbar = ({
             </>
           )}
 
-          <div
+          <motion.div
+            whileHover={{ scale: 1.1 }}
             onClick={() => handleCartClick()}
             className="relative pl-4 cursor-pointer"
           >
@@ -81,7 +87,7 @@ const Navbar = ({
             <div className="bg-red-600 w-[18px] h-[18px] absolute -right-1 -bottom-1 rounded-full text-white flex items-center justify-center text-sm font-medium">
               {cartCountValue}
             </div>
-          </div>
+          </motion.div>
 
           {/* cardSidebar */}
           <CartSidebar

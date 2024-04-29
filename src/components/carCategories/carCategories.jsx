@@ -50,7 +50,7 @@ const CarCategories = ({ cars, addItem }) => {
 
   return (
     <>
-      <div className={styles.home__filters}>
+      <div data-aos="fade-up" className={styles.home__filters}>
         <SearchBar
           manufacturer={manufacturer}
           setManufacturer={setManufacturer}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { MouseEventHandler } from "react";
+import { motion } from "framer-motion";
 
 interface CustomButtomProps {
   title: string;
@@ -21,7 +22,9 @@ const CustomButtom = ({
 }: CustomButtomProps) => {
   return (
     <div>
-      <button
+      <motion.button
+        initial={{ opacity: 0.9 }}
+        whileHover={{ scale: 1.1, opacity: 1 }}
         disabled={false}
         type={btnType || "button"}
         className={`custom-btn ${containerStyles}`}
@@ -34,12 +37,12 @@ const CustomButtom = ({
               src={rightIcon}
               alt="right icon"
               fill
-              className="object-contain"
+              className="object-contain text-white"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
             />
           </div>
         )}
-      </button>
+      </motion.button>
     </div>
   );
 };

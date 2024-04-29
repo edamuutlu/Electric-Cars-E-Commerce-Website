@@ -28,7 +28,10 @@ const CartSidebar = ({
 
   const cartCountValue = cartCount(username);
   const totalPriceValue = totalPrice(username);
-  const savedCarts = cartDetails(username);
+  let savedCarts = {}; // Provide a default value
+  if (typeof window !== 'undefined' && window.localStorage) {
+    savedCarts = cartDetails(username) || {};
+  }
   const arrayFromObject = Object.values(savedCarts);
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>

@@ -59,3 +59,14 @@ h5 {
 .populer_car .swiper-wrapper {
   @apply !h-[690px];
 }
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  z-index: 50;
+  background: #0087ff;
+  transform-origin: 0%;
+}

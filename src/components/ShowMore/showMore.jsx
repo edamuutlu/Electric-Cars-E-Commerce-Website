@@ -9,7 +9,7 @@ const ShowMore = ({ isNext, limit, onChange, maxLimit }) => {
     onChange(newLimit);
   };
   return (
-    <div className="w-full flex justify-center gap-5 mt-10">
+    <div className="w-full flex justify-center gap-5 mt-10" data-aos="fade-up">
       {isNext && (
         <CustomButtom
           title="Show More"

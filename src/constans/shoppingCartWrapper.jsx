@@ -8,6 +8,9 @@ import { ToastContainer } from "react-toastify";
 import Home from "@/app/page";
 import { usePathname } from "next/navigation";
 import ProductDetails from "@/app/product/[slug]/page";
+import { motion, useScroll, useSpring } from "framer-motion"
+import Aos from "aos";
+import "aos/dist/aos.css"
 
 export const ShoppingCartWrapper = ({ children, cars }) => {
   const [carts, setCarts] = useState({
@@ -20,6 +23,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
   const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
   const pathname = usePathname();
   useEffect(() => {
+    Aos.init({ duration: 2000 });
     const savedCarts =
       JSON.parse(localStorage.getItem(username + "_cart")) || {};
     setCarts(savedCarts);
@@ -182,9 +186,16 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
 
   };
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
     <>
+      <motion.div className="progress-bar" style={{ scaleX }} />
       <Navbar
         cartCount={cartCount}
         removeItem={removeItem}

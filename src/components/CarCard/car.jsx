@@ -6,10 +6,11 @@ import styles from "./carcard.module.css";
 import { urlFor } from "@/app/lib/sanity";
 import CustomButtom from "../custombuttom/custombuttom";
 import AddToCart from "../addToCart/addToCart";
+import { motion } from "framer-motion";
 
 const Car = ({ car, addItem }) => {
   return (
-    <div key={car._id} className={`${styles.car_card} group`}>
+    <div data-aos="fade-up" key={car._id} className={`${styles.car_card} group`}>
       <div className={styles.car_card__content}>
         <h4 className={styles.car_card__content}>{car.title}</h4>
       </div>
@@ -20,7 +21,10 @@ const Car = ({ car, addItem }) => {
         <span className="self-end text-[14px] font-medium">/Cash</span>
       </p>
 
-      <div className="relative w-full h-40 my-3 object-contain">
+      <motion.div 
+      initial={{ opacity: 0.9 }}
+        whileHover={{ scale: 1.1, opacity: 1 }} 
+        className="relative w-full h-40 my-3 object-contain">
         <Image
           src={urlFor(car.images[0]).url()}
           alt="car model"
@@ -29,7 +33,7 @@ const Car = ({ car, addItem }) => {
           className="object-contain"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
         />
-      </div>
+      </motion.div>
 
       <div className="relative flex w-full mt-2">
         <div className="flex group-hover:opacity-0 w-full justify-between text-grey transition-all duration-300">

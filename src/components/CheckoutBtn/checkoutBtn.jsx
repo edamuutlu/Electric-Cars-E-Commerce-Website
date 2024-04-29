@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { motion } from "framer-motion";
+import Loader from './../Loader/loader';
 
 const CheckoutBtn = ({ items, username }) => {
   const [loading, setLoading] = useState(false);
@@ -49,8 +51,13 @@ const CheckoutBtn = ({ items, username }) => {
 
   return (
     <>
-      {loading && <div>Loading...</div>} {/* Yükleme durumu göstergesi */}
-      <button
+      {
+        loading &&
+        <Loader />
+      }
+      <motion.button
+        initial={{ opacity: 0.9 }}
+        whileHover={{ scale: 1.1, opacity: 1 }}
         onClick={() => {
           handleCheckout();
         }}
@@ -59,7 +66,7 @@ const CheckoutBtn = ({ items, username }) => {
         disabled={loading} // Yükleme sırasında butonu devre dışı bırak
       >
         Proceed To Checkout
-      </button>
+      </motion.button>
     </>
   );
 };

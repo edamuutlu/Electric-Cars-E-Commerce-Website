@@ -3,7 +3,7 @@
 }
 
 .home__filters {
-  @apply mt-12 w-full flex items-center flex-wrap gap-5;
+  @apply mt-12 w-full z-50 flex items-center flex-wrap gap-5 relative;
 }
 
 .home__filter_container {
@@ -11,7 +11,7 @@
 }
 
 .home__cars_wrapper {
-  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14;
+  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14 z-0;
 }
 
 .home__error_container {
