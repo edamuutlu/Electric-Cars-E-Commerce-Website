@@ -4,9 +4,10 @@ import Link from "next/link";
 import CustomButtom from "@/components/custombuttom/custombuttom";
 import { useEffect, useState } from "react";
 import { IoBagCheck } from "react-icons/io5";
-
+import Image from "next/image";
 
 const SuccessPage = () => {
+  document.title = "Successful Payment - E-Cars";
   const { data: session, status: sessionStatus } = useSession();
   const [initialized, setInitialized] = useState(false);
 
@@ -30,7 +31,7 @@ const SuccessPage = () => {
     };
 
     fetchData();
-  }, [initialized, sessionStatus]);
+  }, [initialized, sessionStatus, session]);
 
   if (sessionStatus === "loading") {
     return (
@@ -44,12 +45,11 @@ const SuccessPage = () => {
             height: "100vh",
           }}
         >
-          <img
-            src="/ecar_logo.png"
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-            }}
+          <Image
+            src={"/ecar_logo.png"}
+            alt="ecars-logo"
+            width={400}
+            height={400}
           />
         </div>
       </div>
@@ -57,22 +57,24 @@ const SuccessPage = () => {
   }
 
   return (
-    <section className="bg-slate-100 flex justify-center items-center h-screen">
-      <div className="bg-white shadow-md py-7 px-10 w-96 h-72 rounded-md flex flex-col gap-3 items-center ">
-        <span><IoBagCheck className="text-green-600 text-5xl" /></span>
-        <div className="text-center pt-7">
-          <h4 className="mb-1">Payment Successful</h4>
-          <span className="text-[14px] text-gray-400">Thank you for your payment!</span>
+    <>
+      <section className="bg-slate-100 flex justify-center items-center h-screen">
+        <div className="bg-white shadow-md py-7 px-10 w-96 h-72 rounded-md flex flex-col gap-3 items-center ">
+          <span><IoBagCheck className="text-green-600 text-5xl" /></span>
+          <div className="text-center pt-7">
+            <h4 className="mb-1">Payment Successful</h4>
+            <span className="text-[14px] text-gray-400">Thank you for your payment!</span>
+          </div>
+          <Link href={"/"}>
+            <CustomButtom
+              title="Countinue Shopping"
+              containerStyles="btn bg-green-600 rounded-lg mt-4"
+              textStyles="text-white text-[14px] leading-[17px] font-bold"
+            />
+          </Link>
         </div>
-        <Link href={"/"}>
-          <CustomButtom
-            title="Countinue Shopping"
-            containerStyles="btn bg-green-600 rounded-lg mt-4"
-            textStyles="text-white text-[14px] leading-[17px] font-bold"
-          />
-        </Link>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

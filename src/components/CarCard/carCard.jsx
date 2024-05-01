@@ -12,7 +12,7 @@ const CarCard = ({ cars, filterCarLenght, brand, model, addItem }) => {
             <span className="ml-5 font-normal">
               Your search for{" "}
               <span className="font-semibold uppercase">
-                "{brand} {model}"
+                &quot;{brand} {model}&quot;
               </span>{" "}
               found
               <span className="text-red-600 font-semibold">
