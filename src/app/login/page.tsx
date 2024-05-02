@@ -11,7 +11,9 @@ const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const { data: session, status: sessionStatus } = useSession();
-  document.title = "Log In - E-Cars";
+  useEffect(() => {
+    document.title = "Log In - E-Cars";
+  }, []);
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/");

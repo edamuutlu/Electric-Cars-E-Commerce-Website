@@ -2,11 +2,15 @@
 import styles from "./hero.module.css";
 import CustomButtom from "../custombuttom/custombuttom";
 import Image from "next/image";
+import { useEffect } from "react";
 
 const Hero = () => {
   const handleScroll = () => {
     window.scrollTo({ top: 900, behavior: "smooth" });
   };
+  useEffect(() => {
+    document.title = "E-Cars";
+  }, []);
   return (
     <div className={styles.hero}>
       <div data-aos="fade-right" className="flex-1 pt-36 padding-x">

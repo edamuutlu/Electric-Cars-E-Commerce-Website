@@ -10,7 +10,9 @@ const Register = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const { data: session, status: sessionStatus } = useSession();
-  document.title = "Register - E-Cars";
+  useEffect(() => {
+    document.title = "Register - E-Cars";
+  }, []);
 
   const isValidEmail = (email: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;

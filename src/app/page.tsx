@@ -14,14 +14,12 @@ export default function Home({
   initialized,
   setInitialized,
 }: any) {
-  document.title = "E-Cars";
   if (sessionStatus === "authenticated") {
     if (!initialized) {
       transferItems(username);
       setInitialized(true);
     }
   }
-
   return (
     <>
       <div className="overflow-hidden">
