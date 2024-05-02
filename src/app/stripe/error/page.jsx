@@ -3,10 +3,11 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { BsBagXFill } from "react-icons/bs";
 import CustomButtom from "@/components/custombuttom/custombuttom";
+import Image from "next/image";
 
 function ErrorPage() {
   const { data: session, status: sessionStatus } = useSession();
-
+  document.title = "Failed Payment - E-Cars";
   if (sessionStatus === "loading") {
     return (
       <div className="loader">
@@ -19,12 +20,11 @@ function ErrorPage() {
             height: "100vh",
           }}
         >
-          <img
-            src="/ecar_logo.png"
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-            }}
+          <Image
+            src={"/ecar_logo.png"}
+            alt="ecars-logo"
+            width={400}
+            height={400}
           />
         </div>
       </div>

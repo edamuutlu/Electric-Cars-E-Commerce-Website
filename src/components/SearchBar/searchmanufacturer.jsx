@@ -90,7 +90,7 @@ const SearchManufacturer = ({
                   value={query}
                   className={styles.search_manufacturer__option}
                 >
-                  Create "{query}"
+                  Create &quot;{query}&quot;
                 </Combobox.Option>
               ) : (
                 filteredOptions.map((option) => (
@@ -114,8 +114,8 @@ const SearchManufacturer = ({
                         {selected ? (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active
-                                ? "text-white"
-                                : "text-pribg-primary-purple"
+                              ? "text-white"
+                              : "text-pribg-primary-purple"
                               }`}
                           ></span>
                         ) : null}

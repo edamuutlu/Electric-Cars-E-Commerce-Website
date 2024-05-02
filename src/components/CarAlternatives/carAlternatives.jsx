@@ -49,7 +49,7 @@ const CarAlternatives = ({ cars, carBrand, carModel, chassisType }) => {
 
     const firstEightCars = filtered.slice(0, limit);
     setFilterCars(firstEightCars);
-  }, [carBrand, carModel]);
+  }, [cars, chassisType, limit, carBrand, carModel]);
 
   return (
     <Swiper

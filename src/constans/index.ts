@@ -141,9 +141,8 @@ const fetchYearColor = async () => {
   try {
     const data = await allYearColor();
     yearsOfProduction = data.map((item: any) => item.year);
-    yearsOfProduction = [...new Set(yearsOfProduction)].sort()
-    yearsOfProduction = ["ALL",...yearsOfProduction];
-
+    yearsOfProduction = [...new Set(yearsOfProduction)].sort();
+    yearsOfProduction = ["ALL", ...yearsOfProduction];
 
     data.forEach((item: any) => {
       item.color.forEach((color: any) => {
@@ -198,5 +197,3 @@ export const footerLinks = [
     ],
   },
 ];
-
-

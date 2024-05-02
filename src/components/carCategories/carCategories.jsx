@@ -46,7 +46,7 @@ const CarCategories = ({ cars, addItem }) => {
 
     const firstEightCars = filtered.slice(0, limit);
     setFilterCars(firstEightCars);
-  }, [manufacturer, carModel, year, color, price, cars, limit, carLenght]);
+  }, [manufacturer, carModel, year, color, price, cars, limit, carLenght, maxPrice]);
 
   return (
     <>
