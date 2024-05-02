@@ -27,7 +27,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     const savedCarts =
       JSON.parse(localStorage.getItem(username + "_cart")) || {};
     setCarts(savedCarts);
-  }, [username]);
+  }, []);
 
   const addItem = (carObject, username) => {
     var storedCartData = localStorage.getItem(username + "_cart");

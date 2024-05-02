@@ -11,7 +11,7 @@ const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const { data: session, status: sessionStatus } = useSession();
-  document.title = "Log In - E-Cars";
+
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/");
@@ -64,11 +64,12 @@ const Login = () => {
             height: "100vh",
           }}
         >
-          <Image
-            src={"/ecar_logo.png"}
-            alt="ecars-logo"
-            width={400}
-            height={400}
+          <img
+            src="/ecar_logo.png"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+            }}
           />
         </div>
       </div>
@@ -189,7 +190,7 @@ const Login = () => {
 
                     <div className="text-left">
                       <p className="text-neutral-600 mt-12">
-                        Don&apos;t have an account?
+                        Don't have an account?
                         <Link
                           className="text-black ml-2 cursor-pointer hover:underline transition"
                           href="/register"

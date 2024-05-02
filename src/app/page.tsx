@@ -4,6 +4,8 @@ import NavigateSideMenu from "@/components/NavigateSideMenu/navigateSideMenu";
 
 //get data
 import CarCategories from "@/components/carCategories/carCategories";
+import { useEffect } from "react";
+
 
 export default function Home({
   cars,
@@ -14,7 +16,6 @@ export default function Home({
   initialized,
   setInitialized,
 }: any) {
-  document.title = "E-Cars";
   if (sessionStatus === "authenticated") {
     if (!initialized) {
       transferItems(username);

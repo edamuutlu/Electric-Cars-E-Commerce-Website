@@ -1,3 +1,4 @@
+import { getServerSession } from "next-auth";
 import SessionProvider from "@/utils/SessionProvider";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -15,12 +16,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   const cars = await allData();
 
   return (
     <html lang="en">
       <body>
-        <SessionProvider>
+        <SessionProvider session={session}>
           <CartProvider>
             <ShoppingCartWrapper cars={cars}>{children}</ShoppingCartWrapper>
           </CartProvider>
