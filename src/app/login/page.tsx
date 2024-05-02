@@ -13,8 +13,6 @@ const Login = () => {
   const { data: session, status: sessionStatus } = useSession();
   useEffect(() => {
     document.title = "Log In - E-Cars";
-  }, []);
-  useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/");
     }

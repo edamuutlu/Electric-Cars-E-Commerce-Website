@@ -7,11 +7,12 @@ import { IoBagCheck } from "react-icons/io5";
 import Image from "next/image";
 
 const SuccessPage = () => {
-  document.title = "Successful Payment - E-Cars";
+  
   const { data: session, status: sessionStatus } = useSession();
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
+    document.title = "Successful Payment - E-Cars";
     const fetchData = async () => {
       if (sessionStatus === "authenticated") {
         var userEmail = session.user?.email;
