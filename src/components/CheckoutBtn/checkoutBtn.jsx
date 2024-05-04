@@ -20,7 +20,7 @@ const CheckoutBtn = ({ items, username }) => {
       quantity: item.quantity
     })),
     mode: "payment",
-    successUrl: "http://localhost:3000/stripe/success",
+    successUrl: "http://localhost:3000/stripe/saveOrderDetails",
     cancelUrl: "http://localhost:3000/stripe/error",
   }
 
