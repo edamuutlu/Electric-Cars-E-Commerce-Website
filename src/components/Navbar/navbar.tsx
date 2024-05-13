@@ -8,8 +8,10 @@ import { useShoppingCart } from "use-shopping-cart";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const Navbar = ({
+  setCartCount,
   cartCount,
   removeItem,
   clearCart,
@@ -25,18 +27,16 @@ const Navbar = ({
       : "guest";
 
   const { handleCartClick } = useShoppingCart();
-  let cartCountValue = 0;
-
-  if (typeof window !== "undefined" && window.localStorage) {
-    cartCountValue = cartCount(username);
-  }
-
-  if (sessionStatus === "authenticated") {
-    console.log(session);
-  }
+  let cartCountValue = cartCount;
+  /* console.log(sessionStatus);
+  console.log(username);
+  console.log(cartCountValue); */
+  useEffect(() => {
+    setCartCount(username);
+  });
 
   return (
-    <header className="w-full fixed z-50 top-[5px]" data-aos="fade-down">
+    <header className="w-full fixed z-50" data-aos="fade-down">
       <nav className="bg-slate-50 bg-opacity-90 shadow-lg max-w-full sticky mx-auto flex justify-between items-center sm:px-16 px-4">
         <div className="p-3">
           <Link href={"/"}>

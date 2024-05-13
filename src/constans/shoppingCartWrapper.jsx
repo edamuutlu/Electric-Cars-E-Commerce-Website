@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 import Home from "@/app/page";
 import { usePathname } from "next/navigation";
 import ProductDetails from "@/app/product/[slug]/page";
-import { motion, useScroll, useSpring } from "framer-motion"
 import Aos from "aos";
 import "aos/dist/aos.css"
 
@@ -18,16 +17,14 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     cartDetails: {},
     totalPrice: 0,
   });
+  const [cartCountValue, setCartCountValue] = useState();
   const [initialized, setInitialized] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
-  const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
   const pathname = usePathname();
+  const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
   useEffect(() => {
     Aos.init({ duration: 2000 });
-    const savedCarts =
-      JSON.parse(localStorage.getItem(username + "_cart")) || {};
-    setCarts(savedCarts);
-  }, [username]);
+  }, []);
 
   const addItem = (carObject, username) => {
     var storedCartData = localStorage.getItem(username + "_cart");
@@ -61,6 +58,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     // Güncellenmiş cartData'yı localStorage'a geri ekleyin
     setCarts(JSON.stringify(cartDataObject));
     localStorage.setItem(username + "_cart", JSON.stringify(cartDataObject));
+    cartCount(username);
   };
 
   const removeItem = (id, username) => {
@@ -81,6 +79,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     // Güncellenmiş cartData'yı localStorage'a geri ekleyin
     setCarts(JSON.stringify(storedCartData));
     localStorage.setItem(username + "_cart", JSON.stringify(storedCartData));
+    cartCount(username);
   };
 
   const clearCart = (username) => {
@@ -95,6 +94,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     // Güncellenmiş cartData'yı localStorage'a geri ekleyin
     setCarts(JSON.stringify(cartDataObject));
     localStorage.setItem(username + "_cart", JSON.stringify(cartDataObject));
+    cartCount(username);
   };
 
   const incrementItem = (id, username) => {
@@ -111,6 +111,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     // Güncellenmiş cartData'yı localStorage'a geri ekleyin
     setCarts(JSON.stringify(storedCartData));
     localStorage.setItem(username + "_cart", JSON.stringify(storedCartData));
+    cartCount(username);
   };
 
   const decrementItem = (id, username) => {
@@ -131,6 +132,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     // Güncellenmiş cartData'yı localStorage'a geri ekleyin
     setCarts(JSON.stringify(storedCartData));
     localStorage.setItem(username + "_cart", JSON.stringify(storedCartData));
+    cartCount(username);
   };
 
   const cartCount = (username) => {
@@ -138,7 +140,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
       var storedCartData = localStorage.getItem(username + "_cart");
       if (storedCartData !== null) {
         storedCartData = JSON.parse(storedCartData);
-        return storedCartData.cartCount;
+        setCartCountValue(storedCartData.cartCount);
       }
     } catch (error) {
 
@@ -186,18 +188,11 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
 
   };
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   return (
     <>
-      <motion.div className="progress-bar" style={{ scaleX }} />
       <Navbar
-        cartCount={cartCount}
+        setCartCount={cartCount}
+        cartCount={cartCountValue}
         removeItem={removeItem}
         clearCart={clearCart}
         incrementItem={incrementItem}

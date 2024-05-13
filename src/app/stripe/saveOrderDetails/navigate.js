@@ -1,9 +1,8 @@
-"use client"
+// navigate.js
+"use client";
 import { useRouter } from "next/navigation";
 
-const SuccessNavigate = ({route}) => {
+export const SuccessNavigate = (route) => {
     const router = useRouter();
     router.push(route);
 };
-
-export default SuccessNavigate ;

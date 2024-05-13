@@ -3,7 +3,7 @@
 }
 
 .home__filters {
-  @apply mt-12 w-full z-50 flex items-center flex-wrap gap-5 relative;
+  @apply mt-12 w-full z-10 flex items-center flex-wrap gap-5 relative;
 }
 
 .home__filter_container {

@@ -21,9 +21,9 @@ const Car = ({ car, addItem }) => {
         <span className="self-end text-[14px] font-medium">/Cash</span>
       </p>
 
-      <motion.div 
-      initial={{ opacity: 0.9 }}
-        whileHover={{ scale: 1.1, opacity: 1 }} 
+      <motion.div
+        initial={{ opacity: 0.9 }}
+        whileHover={{ scale: 1.1, opacity: 1 }}
         className="relative w-full h-40 my-3 object-contain">
         <Image
           src={urlFor(car.images[0]).url()}
@@ -72,7 +72,7 @@ const Car = ({ car, addItem }) => {
             <CustomButtom
               title="View More"
               containerStyles="w-49 py-[16px] rounded-full bg-primary-blue"
-              textStyles="text-white text-[14px] leading-[17px] font-bold mr-3"
+              textStyles="text-white text-[14px] leading-[17px] font-bold mr-1"
               rightIcon="/show-more.png"
             />
           </Link>
@@ -88,7 +88,7 @@ const Car = ({ car, addItem }) => {
             slug={car.slug}
             title="Add to Cart"
             containerStyles="w-50 py-[16px rounded-full bg-red-500"
-            textStyles="text-white text-[14px] leading-[17px] font-bold mr-3"
+            textStyles="text-white text-[14px] leading-[17px] font-bold mr-1"
             rightIcon="/add-to-basket.png"
           />
 

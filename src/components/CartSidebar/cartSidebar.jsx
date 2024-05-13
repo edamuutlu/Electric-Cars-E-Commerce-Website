@@ -26,7 +26,7 @@ const CartSidebar = ({
   const { data: session, status: sessionStatus } = useSession();
   const username = sessionStatus === "authenticated" ? session.user?.email?.substring(0, session.user?.email?.indexOf("@")) : "guest";
 
-  const cartCountValue = cartCount(username);
+  const cartCountValue = cartCount;
   const totalPriceValue = totalPrice(username);
   let savedCarts = {}; // Provide a default value
   if (typeof window !== 'undefined' && window.localStorage) {
