@@ -18,7 +18,7 @@ export async function mailAction({email}){
           }
           });
 
-          const htmlBody = 'Click here to <a href="http://localhost:3000/reset-password/${token}">Reset Password</a>'
+          const htmlBody = `Click here to <a href="http://localhost:3000/reset-password/${token}">Reset Password</a>`;
           const info = await transport.sendMail({
             from: '<mutlunureda@gmail.com>', // sender address
             to: email, // list of receivers
