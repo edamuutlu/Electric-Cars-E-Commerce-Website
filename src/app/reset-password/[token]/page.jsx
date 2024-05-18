@@ -26,20 +26,15 @@ function ResetPasswordPage({ params }) {
       setMessage("Passwords do not match.");
       return;
     }
-
     try {
-      const result = await updatePassword({ newPassword, token: params.token });
-
-      if (result && result.status === "success") {
-        setMessage("Password updated successfully.");
-      } else {
-        setMessage(result.message || "An error occurred. Please try again.");
-      }
-    } catch (error) {
-      setMessage("An error occurred. Please try again.");
-      console.log(error);
-    }
-  };
+      await updatePassword({ newPassword, token: params.token });
+      console.log("Şifre başarıyla güncellendi.");
+  } catch (error) {
+      console.error("Şifre güncelleme hatası:", error);
+      setMessage("An error occurred while updating password.");
+  }
+  
+  }
 
   if (sessionStatus === "loading") {
     return (
