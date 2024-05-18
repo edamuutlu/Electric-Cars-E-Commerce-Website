@@ -3,13 +3,17 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { BiShow, BiHide } from "react-icons/bi"; // Show/Hide icons
 import styles from "@/app/api/auth.module.css";
 import Image from "next/image";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Separate state for confirm password
   const router = useRouter();
   const { data: session, status: sessionStatus } = useSession();
+
   useEffect(() => {
     document.title = "Register - E-Cars";
   }, []);
@@ -18,21 +22,23 @@ const Register = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const firstname = e.target[0].value;
-    const lastname = e.target[1].value;
-    const email = e.target[2].value;
-    const password = e.target[3].value;
-    const phone = e.target[4].value;
+    const { firstname, lastname, email, password, confirmPassword, phone } = e.target.elements;
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(email.value)) {
       setError("Email is invalid");
       return;
     }
 
-    if (!password || password.length < 8) {
+    if (!password.value || password.value.length < 8) {
       setError("Password is invalid");
+      return;
+    }
+
+    if (password.value !== confirmPassword.value) {
+      setError("Passwords do not match");
       return;
     }
 
@@ -43,11 +49,11 @@ const Register = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstname,
-          lastname,
-          email,
-          password,
-          phone,
+          firstname: firstname.value,
+          lastname: lastname.value,
+          email: email.value,
+          password: password.value,
+          phone: phone.value,
         }),
       });
       if (res.status === 400) {
@@ -158,30 +164,60 @@ const Register = () => {
                         type="text"
                         className={styles.auth_input}
                         placeholder="First Name"
+                        name="firstname"
                         required
                       />
                       <input
                         type="text"
                         className={styles.auth_input}
                         placeholder="Last Name"
+                        name="lastname"
                         required
                       />
                       <input
                         type="text"
                         className={styles.auth_input}
                         placeholder="Email"
+                        name="email"
                         required
                       />
-                      <input
-                        type="password"
-                        className={styles.auth_input}
-                        placeholder="Password"
-                        required
-                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className={styles.auth_input}
+                          placeholder="Password"
+                          name="password"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
+                        >
+                          {showPassword ? <BiShow /> : <BiHide />}
+                        </button>
+                      </div>
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          className={styles.auth_input}
+                          placeholder="Confirm Password"
+                          name="confirmPassword"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
+                        >
+                          {showConfirmPassword ? <BiShow /> : <BiHide />}
+                        </button>
+                      </div>
                       <input
                         type="text"
                         className={styles.auth_input}
                         placeholder="Mobile Number"
+                        name="phone"
                         required
                       />
                       <button type="submit" className={styles.auth_submit}>

@@ -28,6 +28,10 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    verifytoken: {
+      type: String,
+      require: false,
+    }
   },
   { timestamps: true }
 );

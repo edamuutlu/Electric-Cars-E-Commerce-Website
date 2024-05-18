@@ -4,13 +4,16 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import { BiShow, BiHide } from "react-icons/bi"; // Show/Hide icons
 import styles from "@/app/api/auth.module.css";
 import Image from "next/image";
 
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const { data: session, status: sessionStatus } = useSession();
+  
   useEffect(() => {
     document.title = "Log In - E-Cars";
     if (sessionStatus === "authenticated") {
@@ -153,12 +156,21 @@ const Login = () => {
                         placeholder="Email"
                         required
                       />
-                      <input
-                        type="password"
-                        className={styles.auth_input}
-                        placeholder="Password"
-                        required
-                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className={styles.auth_input}
+                          placeholder="Password"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
+                        >
+                          {showPassword ? <BiShow /> : <BiHide />}
+                        </button>
+                      </div>
                       <button type="submit" className={styles.auth_submit}>
                         {" "}
                         Sign In
@@ -173,7 +185,7 @@ const Login = () => {
                         onClick={handleForgotMyPassword}
                         className="text-neutral-600 mt-2 cursor-pointer hover:underline transition"
                       >
-                        Forgot My Password 
+                        Forgot My Password
                       </button>
                     </div>
 
