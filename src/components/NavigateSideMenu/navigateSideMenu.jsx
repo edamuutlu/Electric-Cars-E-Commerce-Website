@@ -4,9 +4,15 @@ import { IoCarSport } from "react-icons/io5";
 import { BsPersonCircle } from "react-icons/bs";
 import { GiHomeGarage, GiCarKey } from "react-icons/gi";
 import NavigateItem from "./navigateItem";
+import { useSession } from "next-auth/react";
 
 const NavigateSideMenu = () => {
   const [activeMenu, setActiveMenu] = useState(null);
+  const { data: session, status: sessionStatus } = useSession();
+  const username =
+    sessionStatus === "authenticated"
+      ? session.user?.email?.substring(0, session.user?.email?.indexOf("@"))
+      : "Guest";
 
   return (
     <aside className="h-screen fixed top-[30%] z-50" data-aos="fade-right">
@@ -50,7 +56,7 @@ const NavigateSideMenu = () => {
             bg-blue-100 text-blue-800 text-sm font-semibold invisible opacity-20 -translate-x-3 transition-all 
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0"
           >
-            Nuri Eda
+            {username}
           </div>
         </div>
       </nav>

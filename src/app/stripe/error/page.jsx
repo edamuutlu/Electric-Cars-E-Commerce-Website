@@ -8,9 +8,34 @@ import { useEffect } from "react";
 
 function ErrorPage() {
   const { data: session, status: sessionStatus } = useSession();
+  const username =
+    sessionStatus === "authenticated"
+      ? session.user?.email?.substring(0, session.user?.email?.indexOf("@"))
+      : "guest";
   useEffect(() => {
     document.title = "Failed Payment - E-Cars";
-  }, []);
+    const fetchData = async () => {
+      const storedCartGuest = localStorage.getItem(username + "_cart");
+      const storedCartData = JSON.parse(storedCartGuest);
+      const cartData = Object.values(storedCartData.cartDetails);
+
+      if (storedCartGuest && username !== "guest") {
+        try {
+          const response = await fetch('/api/saveOrder', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ cartData, state: false }),
+          });
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [username]);
   if (sessionStatus === "loading") {
     return (
       <div className="loader">
