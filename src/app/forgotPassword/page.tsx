@@ -3,57 +3,56 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FaGoogle, FaGithub } from "react-icons/fa";
 import styles from "@/app/api/auth.module.css";
 import Image from "next/image";
 
-const Login = () => {
+const forgotPassword = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const { data: session, status: sessionStatus } = useSession();
   useEffect(() => {
-    document.title = "Log In - E-Cars";
+    document.title = "Change Password  - E-Cars";
     if (sessionStatus === "authenticated") {
       router.replace("/");
     }
   }, [sessionStatus, router]);
 
-  const isValidEmail = (email: string) => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailRegex.test(email);
-  };
-
-  const handleSubmit = async (e: any) => {
+  const handleForgotPassword = async (e: any) => {
     e.preventDefault();
     const email = e.target[0].value;
-    const password = e.target[1].value;
+    const newPassword = e.target[1].value;
+    const confirmPassword = e.target[2].value;
 
-    if (!isValidEmail(email)) {
-      setError("Email is invalid");
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
       return;
     }
 
-    if (!password || password.length < 8) {
-      setError("Password is invalid");
+    if (newPassword.length < 8) {
+      setError("Password is too short");
       return;
     }
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-
-    if (res?.error) {
-      setError("Invalid email or password");
-      if (res?.url) router.replace("/");
-    } else {
-      setError("");
+    // Şifreyi sıfırlama işlemleri
+    try {
+      const response = await fetch("/api/resetPassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, newPassword }),
+      });
+      if (response.status === 200) {
+        setError("");
+        router.push("/login");
+      } 
+      if (response.status === 404) {
+        setError("No user found with this email address");
+      }
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      setError("An error occurred while resetting password");
     }
-  };
-
-  const handleForgotMyPassword = () => {
-    router.push("/forgotPassword");
   };
 
   if (sessionStatus === "loading") {
@@ -143,10 +142,10 @@ const Login = () => {
               <div className={styles.auth_container}>
                 <div className="flex justify-center">
                   <div className={styles.auth_formDiv}>
-                    <h2 className="text-black text-5xl mb-8 font-semibold">
-                      Login
+                    <h2 className="text-black text-4xl mb-8 font-semibold">
+                      Change Password
                     </h2>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleForgotPassword }>
                       <input
                         type="text"
                         className={styles.auth_input}
@@ -156,49 +155,23 @@ const Login = () => {
                       <input
                         type="password"
                         className={styles.auth_input}
-                        placeholder="Password"
+                        placeholder="New Password"
+                        required
+                      />
+                      <input
+                        type="password"
+                        className={styles.auth_input}
+                        placeholder="Confirm Password"
                         required
                       />
                       <button type="submit" className={styles.auth_submit}>
                         {" "}
-                        Sign In
+                        Reset password
                       </button>
                       <p className="text-red-600 text-[16px] mb-4">
                         {error && error}
                       </p>
                     </form>
-
-                    <div className="text-right">
-                      <button
-                        onClick={handleForgotMyPassword}
-                        className="text-neutral-600 mt-2 cursor-pointer hover:underline transition"
-                      >
-                        Forgot My Password 
-                      </button>
-                    </div>
-
-                    <div className="flex flex-row items-center gap-4 mt-10 justify-center">
-                      <button
-                        className="bg-white flex text-black w-12 h-12 rounded-full items-center text-center cursor-pointer justify-center"
-                        onClick={() => {
-                          signIn("github");
-                        }}
-                      >
-                        <FaGithub size={30}></FaGithub>
-                      </button>
-
-                      <button
-                        className="bg-white flex text-center w-12 h-12 rounded-full items-center cursor-pointer justify-center"
-                        onClick={() => {
-                          signIn("google");
-                        }}
-                      >
-                        <FaGoogle
-                          size={30}
-                          style={{ color: "#4285F4" }}
-                        ></FaGoogle>
-                      </button>
-                    </div>
 
                     <div className="text-left">
                       <p className="text-neutral-600 mt-12">
@@ -222,4 +195,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default forgotPassword;
