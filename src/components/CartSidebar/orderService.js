@@ -1,12 +1,14 @@
 import Order from "@/models/Order";
+import connect from "@/utils/db";
 
-const saveOrderToDatabase = async (userId, productIds) => {
+const saveOrderToDatabase = async (userId, productIds, state) => {
+  await connect();
+  const order = new Order({
+    userId,
+    productId: productIds,
+    state: state // or any initial state
+  });
   try {
-    const order = new Order({
-      userId,
-      productId: productIds,
-      state: true // or any initial state
-    });
     await order.save();
     console.log('Order saved successfully:', order);
     return order; // Optionally return the saved order
@@ -16,4 +18,4 @@ const saveOrderToDatabase = async (userId, productIds) => {
   }
 };
 
-export default saveOrderToDatabase ;
+export default saveOrderToDatabase;

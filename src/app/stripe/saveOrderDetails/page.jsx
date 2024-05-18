@@ -1,13 +1,49 @@
-import { findUserId } from "@/constans/findUserId";
-import Image from "next/image";
-import saveOrderToDatabase from './../../../components/CartSidebar/orderService';
+"use client";  // Mark this file as a client component
 
-const SaveOrderDetails = async () => {
+import { useEffect } from 'react';
+import Image from 'next/image';
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-  const userId = await findUserId();
-  console.log(userId);
-  const items = [];
-  saveOrderToDatabase(userId, items.map(item => item.productId));
+const SaveOrderDetails = () => {
+  const router = useRouter();
+  const { data: session, status: sessionStatus } = useSession();
+  const username =
+    sessionStatus === "authenticated"
+      ? session.user?.email?.substring(0, session.user?.email?.indexOf("@"))
+      : "guest";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedCartGuest = localStorage.getItem(username + "_cart");
+      const storedCartData = JSON.parse(storedCartGuest);
+      const cartData = Object.values(storedCartData.cartDetails);
+
+      if (storedCartGuest && username !== "guest") {
+        try {
+          const response = await fetch('/api/saveOrder', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ cartData, state: true }),
+          });
+
+          if (response.ok) {
+            router.push("/stripe/success");
+          } else {
+            console.error('Failed to save order');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      } else {
+        router.push("/stripe/success");
+      }
+    };
+
+    fetchData();
+  }, [username, router]);
 
   return (
     <div className="loader">

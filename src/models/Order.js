@@ -6,7 +6,7 @@ const orderSchema = new Schema(
   {
     userId: {
       type: String,
-      unique: true, // Kullanıcı kimliği benzersiz olmalı
+      unique: false, // Kullanıcı kimliği benzersiz olmalı
       required: true,
     },
     productId: {
@@ -15,10 +15,10 @@ const orderSchema = new Schema(
       required: false,
     },
     state: {
-        type: Boolean,
-        unique: false,
-        required: true,
-        default: false,
+      type: Boolean,
+      unique: false,
+      required: true,
+      default: false,
     }
   },
   { timestamps: true }

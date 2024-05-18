@@ -17,7 +17,7 @@ export const ShoppingCartWrapper = ({ children, cars }) => {
     cartDetails: {},
     totalPrice: 0,
   });
-  const [cartCountValue, setCartCountValue] = useState();
+  const [cartCountValue, setCartCountValue] = useState(0);
   const [initialized, setInitialized] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
   const pathname = usePathname();

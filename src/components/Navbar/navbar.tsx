@@ -28,9 +28,6 @@ const Navbar = ({
 
   const { handleCartClick } = useShoppingCart();
   let cartCountValue = cartCount;
-  /* console.log(sessionStatus);
-  console.log(username);
-  console.log(cartCountValue); */
   useEffect(() => {
     setCartCount(username);
   });
