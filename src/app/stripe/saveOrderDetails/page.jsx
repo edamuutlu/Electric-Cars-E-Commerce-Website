@@ -12,6 +12,12 @@ const SaveOrderDetails = () => {
     sessionStatus === "authenticated"
       ? session.user?.email?.substring(0, session.user?.email?.indexOf("@"))
       : "guest";
+  function generateShortId(length) {
+    return Array.from(crypto.getRandomValues(new Uint8Array(length)))
+      .map((b) => b.toString(36))
+      .join('')
+      .substring(0, length);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,16 +27,17 @@ const SaveOrderDetails = () => {
 
       if (storedCartGuest && username !== "guest") {
         try {
+          const orderNumber = generateShortId(8);
           const response = await fetch('/api/saveOrder', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ cartData, state: true }),
+            body: JSON.stringify({ cartData, orderNumber, state: true }),
           });
 
           if (response.ok) {
-            router.push("/stripe/success");
+            router.push(`/stripe/success?orderNumber=${orderNumber}`);
           } else {
             console.error('Failed to save order');
           }
@@ -38,7 +45,7 @@ const SaveOrderDetails = () => {
           console.error('Error:', error);
         }
       } else {
-        router.push("/stripe/success");
+        router.push(`/stripe/success`);
       }
     };
 
