@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
 export const POST = async (request: any) => {
-  const { cartData, state } = await request.json();
+  const { cartData, orderNumber, state } = await request.json();
   let productIds: string[] = []; // Ürün ID'lerinin tutulacağı dizi
 
   try {
@@ -17,7 +17,7 @@ export const POST = async (request: any) => {
     });
 
     // saveOrderToDatabase fonksiyonuna productIds dizisini geçin
-    await saveOrderToDatabase(email, productIds, state);
+    await saveOrderToDatabase(email, productIds, orderNumber, state);
 
     return new NextResponse(
       { message: "Order saved successfully" as string },

@@ -5,14 +5,23 @@ import CustomButtom from "@/components/custombuttom/custombuttom";
 import { useEffect, useState } from "react";
 import { IoBagCheck } from "react-icons/io5";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const SuccessPage = () => {
-  
   const { data: session, status: sessionStatus } = useSession();
   const [initialized, setInitialized] = useState(false);
+  const [orderNumber, setOrderNumber] = useState('');
+  const pathname = usePathname();
 
   useEffect(() => {
     document.title = "Successful Payment - E-Cars";
+    if (pathname) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderNumber = urlParams.get('orderNumber');
+      if (orderNumber) {
+        setOrderNumber(orderNumber);
+      }
+    }
     const fetchData = async () => {
       if (sessionStatus === "authenticated") {
         var userEmail = session.user?.email;
@@ -32,7 +41,7 @@ const SuccessPage = () => {
     };
 
     fetchData();
-  }, [initialized, sessionStatus, session]);
+  }, [initialized, sessionStatus, session, pathname]);
 
   if (sessionStatus === "loading") {
     return (
@@ -64,6 +73,7 @@ const SuccessPage = () => {
           <span><IoBagCheck className="text-green-600 text-5xl" /></span>
           <div className="text-center pt-7">
             <h4 className="mb-1">Payment Successful</h4>
+            {orderNumber && <p className="font-semibold">Order #{orderNumber}</p>}
             <span className="text-[14px] text-gray-400">Thank you for your payment!</span>
           </div>
           <Link href={"/"}>
