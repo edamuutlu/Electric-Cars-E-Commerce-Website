@@ -196,7 +196,7 @@ const ProductDetails = () => {
           </div>
 
           {/* Car Slider */}
-          <div className="px-8" data-aos="fade-up">
+          <div className="px-8 mt-8" data-aos="fade-up">
             <h4 className="text-center my-2">{car.title} alternatives</h4>
             <CarAlternatives
               cars={cars}
